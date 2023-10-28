@@ -1,0 +1,12 @@
+{
+  "account": "183429409846",
+  "region": "us-east-1",
+  "acknowledged-issue-numbers": [
+    null,
+    19836
+  ],
+  "hosted-zone:account=183429409846:domainName=2024.lincolnhack.org:region=us-east-1": {
+    "Id": "/hostedzone/Z084830024CM67I9CAD70",
+    "Name": "2024.lincolnhack.org."
+  }
+}

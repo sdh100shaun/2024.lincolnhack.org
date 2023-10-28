@@ -1,0 +1,30 @@
+{
+  "name": "cdk-lincolnhack",
+  "version": "1.0.0",
+  "description": "cdk for lincolnhack site",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "deploy": "cdk deploy",
+    "destroy": "cdk destroy",
+    "synth": "cdk synth"
+  },
+  "keywords": [
+    "aws",
+    "cdk",
+    "typescript",
+    "lincolnhack"
+  ],
+  "author": "shaun@shaunharre.co.uk",
+  "license": "MIT",
+  "dependencies": {
+    "aws-cdk": "^2.103.1",
+    "aws-cdk-lib": "^2.103.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.9",
+    "typescript": "^5.2.2"
+  }
+}

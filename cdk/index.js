@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const aws_cdk_lib_1 = require("aws-cdk-lib");
+const s3_static_site_with_cloudfront_1 = require("./stacks/s3-static-site-with-cloudfront");
+const app = new aws_cdk_lib_1.App();
+const stack = new aws_cdk_lib_1.Stack(app, "LincolnHackHoldingPage", { env: {
+        account: app.node.tryGetContext("account"),
+        region: app.node.tryGetContext("region"),
+    } });
+new s3_static_site_with_cloudfront_1.StaticSite(stack, "HoldingPage", {
+    domainName: "2024.lincolnhack.org",
+});
+app.synth();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUF5QztBQUN6Qyw0RkFBcUU7QUFFckUsTUFBTSxHQUFHLEdBQUcsSUFBSSxpQkFBRyxFQUFFLENBQUM7QUFDdEIsTUFBTSxLQUFLLEdBQUcsSUFBSSxtQkFBSyxDQUFDLEdBQUcsRUFBRSx3QkFBd0IsRUFBQyxFQUFFLEdBQUcsRUFBRTtRQUNyRCxPQUFPLEVBQUUsR0FBRyxDQUFDLElBQUksQ0FBQyxhQUFhLENBQUMsU0FBUyxDQUFDO1FBQzFDLE1BQU0sRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUM7S0FDekMsRUFBRSxDQUFDLENBQUM7QUFDWCxJQUFJLDJDQUFVLENBQUMsS0FBSyxFQUFFLGFBQWEsRUFBRTtJQUNuQyxVQUFVLEVBQUUsc0JBQXNCO0NBQ25DLENBQUMsQ0FBQztBQUVILEdBQUcsQ0FBQyxLQUFLLEVBQUUsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFN0YWNrLCBBcHAgfSBmcm9tICdhd3MtY2RrLWxpYic7XG5pbXBvcnQgeyBTdGF0aWNTaXRlIH0gZnJvbSBcIi4vc3RhY2tzL3MzLXN0YXRpYy1zaXRlLXdpdGgtY2xvdWRmcm9udFwiO1xuXG5jb25zdCBhcHAgPSBuZXcgQXBwKCk7XG5jb25zdCBzdGFjayA9IG5ldyBTdGFjayhhcHAsIFwiTGluY29sbkhhY2tIb2xkaW5nUGFnZVwiLHsgZW52OiB7XG4gICAgICAgIGFjY291bnQ6IGFwcC5ub2RlLnRyeUdldENvbnRleHQoXCJhY2NvdW50XCIpLFxuICAgICAgICByZWdpb246IGFwcC5ub2RlLnRyeUdldENvbnRleHQoXCJyZWdpb25cIiksXG4gICAgICB9IH0pO1xubmV3IFN0YXRpY1NpdGUoc3RhY2ssIFwiSG9sZGluZ1BhZ2VcIiwge1xuICBkb21haW5OYW1lOiBcIjIwMjQubGluY29sbmhhY2sub3JnXCIsXG59KTtcblxuYXBwLnN5bnRoKCk7Il19
