@@ -52,6 +52,12 @@ export class StaticSite extends Construct {
       autoDeleteObjects: true, // NOT recommended for production code
     });
 
+    const corsRule: s3.CorsRule = {
+      allowedMethods: [s3.HttpMethods.POST, s3.HttpMethods.GET, s3.HttpMethods.HEAD ],
+      allowedOrigins: ['api.' + siteDomain, siteDomain],
+    };
+    siteBucket.addCorsRule(corsRule);
+
     // Grant access to cloudfront
     siteBucket.addToResourcePolicy(new iam.PolicyStatement({
       actions: ['s3:GetObject'],
@@ -85,8 +91,10 @@ export class StaticSite extends Construct {
       defaultBehavior: {
         origin: new cloudfront_origins.S3Origin(siteBucket, {originAccessIdentity: cloudfrontOAI}),
         compress: true,
+        originRequestPolicy: cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
         allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        
       }
     })
 
