@@ -277,6 +277,15 @@ header nav li:last-child{
 	padding: 18px 42px;
 }
 
+.sponsors img#sponsors{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 55%;
+	height: auto;
+	margin: 0 auto;
+}
 
 @media (max-width: 800px){
 

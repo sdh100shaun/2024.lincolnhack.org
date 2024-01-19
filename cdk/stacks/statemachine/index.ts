@@ -34,7 +34,7 @@ export class StateMachineStack extends cdk.Stack {
         });
         const stateMachine: stepfunctions.StateMachine = new stepfunctions.StateMachine(this, 'StateMachine', {
             stateMachineName: 'ContactFormStateMachine',
-            stateMachineType: stepfunctions.StateMachineType.STANDARD,
+            stateMachineType: stepfunctions.StateMachineType.EXPRESS,
             definitionBody: stepfunctions.DefinitionBody.fromChainable(new stepfunctions.Pass(this, 'StartState', {
                 result: stepfunctions.Result.fromObject({
                     statusCode: 200,
