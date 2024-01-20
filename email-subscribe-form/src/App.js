@@ -46,6 +46,7 @@ function SubscribeForm() {
           onChange={handleEmailChange}
         />
         <button  className="btn" type="submit">Subscribe</button>
+        <br />
         <p className="message" >{message}</p>
       </form>
   );

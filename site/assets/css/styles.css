@@ -284,9 +284,22 @@ header nav li:last-child{
 	justify-content: center;
 	width: 55%;
 	height: auto;
-	margin: 0 auto;
+	margin: 0 auto 20px auto;
 }
-
+.sponsors img.supporters{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 85%;
+	height: auto;
+	margin: 0 auto 10px auto;
+}
+.sponsors h3 {
+	font: bold 32px 'Open Sans', sans-serif;
+	margin-bottom: 35px;
+	text-align: center;
+}
 @media (max-width: 800px){
 
 	.contact div#root div form input{
