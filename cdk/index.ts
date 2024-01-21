@@ -8,7 +8,16 @@ const stack = new Stack(app, "LincolnHackHoldingPage",{ env: {
         region: app.node.tryGetContext("region"),
       } });
 new StaticSite(stack, "HoldingPage", {
-  domainName: "2024.lincolnhack.org",
+  domainName: process.env.DOMAIN_NAME || "2024.lincolnhack.org",
+});
+
+const siteStack = new Stack(app, "LincolnHack",{ env: {
+        account: app.node.tryGetContext("account"),
+        region: app.node.tryGetContext("region"),
+      } });
+new StaticSite(siteStack, "site", {
+  domainName: process.env.DOMAIN_NAME || "2024.lincolnhack.org",
+  
 });
 
 new StateMachineStack(stack, "StateMachineStack", {

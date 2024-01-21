@@ -47,6 +47,7 @@ export class StateMachineStack extends cdk.Stack {
 
         const db = new dynamodb.Table(this, 'LincolnHackMailingList', {
             partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
+            tableName: 'LincolnHackMailingList',
             removalPolicy: cdk.RemovalPolicy.RETAIN_ON_UPDATE_OR_DELETE,
         });
 
@@ -68,10 +69,9 @@ export class StateMachineStack extends cdk.Stack {
                 result: stepfunctions.Result.fromObject({
                     statusCode: 200,
                     // return input from task in body   
-                    inputPath: '$.input',
                     body:   {   
                         "message": "Thanks for signing up to the LincolnHack mailing list",
-                        "email": {"email":stepfunctions.renderJsonPath("$.input.email")},
+                        "email": {"email":stepfunctions.TaskInput.fromJsonPathAt('$.input.email') },
                     },
                 }),
                 

@@ -7,11 +7,14 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-p.message{
+section p.message{
 	color: #984350;
 	font-size: 1.0em;
 	font-weight: 800;
 	text-align: center;
+	clear: both;
+	min-width: 75%;
+	padding-top: 1em;
 }
 
 html{
