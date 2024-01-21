@@ -45,4 +45,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 - Author: Rob Willie
 - Email: hello@lincolnhack.org
-- GitHub: [sdh100shaun](https://github.com/bigWillie)
+- GitHub: [bigWillie](https://github.com/bigWillie)
