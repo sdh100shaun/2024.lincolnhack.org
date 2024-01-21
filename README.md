@@ -21,7 +21,9 @@ This is the site repository.
 To be able to reproduce this site you will require 
 
 Nodejs 20
+
 CDK 
+
 An AWS account to host it 
 
 ## Usage
