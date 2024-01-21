@@ -31,7 +31,7 @@ constructor(construct: Construct, name: string, props: OIDCRoleProps) {
             iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')
         ],
         description: 'Role for GitHub OIDC to carry out cdk actions',
-        maxSessionDuration: cdk.Duration.minutes(20)
+        maxSessionDuration: cdk.Duration.minutes(60)
     });
 
     const iamRepoDeployAccess = props.repositoryConfig.map(

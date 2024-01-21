@@ -7,18 +7,22 @@ import * as stepfunctions from 'aws-cdk-lib/aws-stepfunctions';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as route53_targets from 'aws-cdk-lib/aws-route53-targets';
 import * as stepfunctions_tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
-import { Stack } from 'aws-cdk-lib';
+
 
 export interface StateMachineProps extends cdk.StackProps{
     domainName: string;
+    hostedZoneId: string;
   }
 
 
-export class StateMachineStack extends Construct {
-    constructor(parent: Stack, id: string, props?: StateMachineProps) {
-        super(parent, id);
+export class StateMachineStack extends cdk.Stack {
+    constructor(construct: Construct, name: string, props?: StateMachineProps) {
+        super(construct, name);
         const domainName = props?.domainName || '2024.lincolnhack.org'
-        const zone = route53.HostedZone.fromLookup(this, 'Zone', { domainName: domainName });
+        const zone = route53.HostedZone.fromHostedZoneAttributes(this, 'Zone', { 
+            zoneName: domainName,
+            hostedZoneId: props?.hostedZoneId || 'Z084830024CM67I9CAD70'
+         });
         
        
 
