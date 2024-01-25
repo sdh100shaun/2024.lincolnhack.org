@@ -1,0 +1,30 @@
+---
+const { selected } = Astro.props;
+---
+<header class="uppercase lincolnHack-purple text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="shareTechFont text-lg font-bold">LincolnHack 2024</a>
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="/" class="hover:text-blue-300">Home</a></li>
+                <li><a href="/faq" class="hover:text-blue-300">FAQ</a></li>
+                <li>
+                    <a href="/#register"
+                        class="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded transition duration-300">
+                        Register Now
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="countdown">
+    <div class="button-dark-purple text-white font-bold py-2 px-4  text-center">
+        <span>Registeration opens in</span>
+        <span id="days"></span> days
+        <span id="hours"></span> hrs
+        <span id="minutes"></span> mins
+        <span id="seconds"></span> secs
+    </div>
+</div>
