@@ -1,0 +1,86 @@
+---
+
+const FAQs = [
+    {
+      "question": "What is a Hackathon?",
+      "answer": "A hackathon is a social coding event where people come together in a collaborative environment to address challenges presented by sponsors, and hopefully win prizes!"
+    },
+    {
+      "question": "Why would someone participate in a Hackathon?",
+      "answer": "Individuals are drawn to hackathons for many reasons: to embrace the thrill of the challenge, to explore their creative potential, to engage in collaborative community projects, to expand their network, and of course, the swag."
+    },
+    {
+      "question": "Who is this event for?",
+      "answer": "LincolnHack is open to anyone interested."
+    },
+    {
+      "question": "Is the event open to all ages?",
+      "answer": "LincolnHack is limited to those aged 18 and up. Those aged 14-17 can participate with a parent or guardian."
+    },
+    {
+      "question": "Who can participate? Are there any required skills?",
+      "answer": "All are welcome to participate. You do not need to be a programmer or developer. We encourage anyone with a passion for solving problems to join us."
+    },
+    {
+      "question": "Do I need a team?",
+      "answer": "While you do have the option of working alone, LincolnHack is a team event so working with others is encouraged. Teams can be any size, but we strongly suggest teams of 4 people as each challenge is limited to 4 prizes..."
+    },
+    {
+      "question": "Will the challenges be announced before the event?",
+      "answer": "Yes, the challenges will be announced two days before the event. You can find them on our website."
+    },
+    {
+      "question": "Is there anything that I need to prep?",
+      "answer": "Other than finding people to team up with, there is nothing that you need to prepare in advance."
+    },
+    {
+      "question": "How much does it cost?",
+      "answer": "FREE. LincolnHack is a free event for all participants and spectators."
+    },
+    {
+      "question": "Where can I find directions to the building?",
+      "answer": "LincolnHack will be taking place at Mosaic Lincoln https://www.mosaiclincoln.co.uk. The address is 13-14 Silver St, Lincoln LN2 1DY."
+    },
+    {
+      "question": "Where do I park?",
+      "answer": "There is no parking at the venue, so we recommend using the public parking at the Lincoln Central Car Park, St Mary's St, Lincoln LN5 7EQ."
+    },
+    {
+      "question": "Do I have to stay the whole time?",
+      "answer": "The hackathon is a 24-hour event, but you are not required to stay the entire time. You are welcome to come and go as you please."
+    },
+    {
+      "question": "Will there be food?",
+      "answer": "Yes, all meals will be provided throughout the event. When you register, please specify your dietary requirements so we can accommodate them.  We will also have snacks and drinks available."
+    },
+    {
+      "question": "Who will be judging?",
+      "answer": "The judging panel is made up of our sponsors and local tech leaders."
+    },
+    {
+      "question": "What do I need to bring?",
+      "answer": "You will need to bring your own laptop, charger, and any other equipment you may need. We will provide the WiFi, power, and food. Sleeping bags, pillows and toothbrush are optional, but recommended."
+    }
+  ];
+
+
+
+---
+
+
+<div class="max-w-4xl mx-auto p-5">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Frequently Asked Questions</h2>
+
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+
+            {FAQs.map(faq => (
+                <div class="px-4 py-5 border-b border-gray-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">{faq.question}</h3>
+                    <p class="mt-2 text-sm text-gray-600">{faq.answer}</p>
+                </div>
+            ))}
+
+           
+        </div>
+    </div>
+</div>
