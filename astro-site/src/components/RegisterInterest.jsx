@@ -42,6 +42,7 @@ function SubscribeForm() {
         <input
           className="px-4 py-2 rounded-l"
           type="email"
+          name="email"
           placeholder="Enter your email"
           value={email}
           onChange={handleEmailChange}
