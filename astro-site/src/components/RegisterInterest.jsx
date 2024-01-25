@@ -40,7 +40,7 @@ function SubscribeForm() {
   return (
       <form onSubmit={handleSubmit}>
         <input
-          class="px-4 py-2 rounded-l"
+          className="px-4 py-2 rounded-l"
           type="email"
           placeholder="Enter your email"
           value={email}
