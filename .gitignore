@@ -1,6 +1,6 @@
 cdk/node_modules
 email-subscribe-form/node_modules
 cdk/cdk.out
-dist
+site/*
 node_modules
 
