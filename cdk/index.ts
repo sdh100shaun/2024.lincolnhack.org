@@ -15,6 +15,15 @@ new StaticSite(app, "site", {
   hostedZoneId: "Z084830024CM67I9CAD70",
 });
 
+new StaticSite(app, "demosite", {
+  env: {
+    account: app.node.tryGetContext("account"),
+    region: app.node.tryGetContext("region"),
+  },
+  domainName: "demo.2024.lincolnhack.org",
+  hostedZoneId: "Z084830024CM67I9CAD70",
+});
+
 new StateMachineStack(app, "StateMachine", {
     env: {
         account: app.node.tryGetContext("account"),

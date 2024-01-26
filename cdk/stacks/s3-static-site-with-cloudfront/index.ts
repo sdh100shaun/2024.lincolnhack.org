@@ -41,7 +41,7 @@ export class StaticSite extends cdk.Stack {
 
     // Content bucket
     const siteBucket = new s3.Bucket(this, 'SiteBucket', {
-      bucketName: siteDomain,
+      bucketName: siteDomain + "-siteassets",
       publicReadAccess: false,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
 
@@ -77,6 +77,7 @@ export class StaticSite extends cdk.Stack {
     const certificate = new acm.Certificate(this, 'SiteCertificate', {
       domainName: siteDomain,
       validation: acm.CertificateValidation.fromDns(zone),
+      
     });
 
     new CfnOutput(this, 'Certificate', { value: certificate.certificateArn });
