@@ -1,3 +1,4 @@
+import * as cdk from 'aws-cdk-lib'
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as acm from 'aws-cdk-lib/aws-certificatemanager';
@@ -5,13 +6,15 @@ import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as cloudfront_origins from 'aws-cdk-lib/aws-cloudfront-origins';
-import { CfnOutput, Duration, RemovalPolicy, Stack } from 'aws-cdk-lib';
+import { CfnOutput, Duration, RemovalPolicy } from 'aws-cdk-lib';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
+
 const path = require('path');
 
-export interface StaticSiteProps {
+export interface StaticSiteProps extends cdk.StackProps{
   domainName: string;
+  hostedZoneId: string;
 }
 
 /**
@@ -20,11 +23,15 @@ export interface StaticSiteProps {
  * The site redirects from HTTP to HTTPS, using a CloudFront distribution,
  * Route53 alias record, and ACM certificate.
  */
-export class StaticSite extends Construct {
-  constructor(parent: Stack, name: string, props: StaticSiteProps) {
-    super(parent, name);
+export class StaticSite extends cdk.Stack {
+  constructor(construct: Construct, name: string, props: StaticSiteProps) {
+    super(construct, name);
+   
+    const zone = route53.HostedZone.fromHostedZoneAttributes(this, 'Zone', { 
+      zoneName: props.domainName,
+      hostedZoneId: props.hostedZoneId
+    });
 
-    const zone = route53.HostedZone.fromLookup(this, 'Zone', { domainName: props.domainName });
     const siteDomain = props.domainName;
     const cloudfrontOAI = new cloudfront.OriginAccessIdentity(this, 'cloudfront-OAI', {
       comment: `OAI for ${name}`
@@ -34,7 +41,7 @@ export class StaticSite extends Construct {
 
     // Content bucket
     const siteBucket = new s3.Bucket(this, 'SiteBucket', {
-      bucketName: siteDomain,
+      bucketName: siteDomain + "-siteassets",
       publicReadAccess: false,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
 
@@ -70,6 +77,7 @@ export class StaticSite extends Construct {
     const certificate = new acm.Certificate(this, 'SiteCertificate', {
       domainName: siteDomain,
       validation: acm.CertificateValidation.fromDns(zone),
+      
     });
 
     new CfnOutput(this, 'Certificate', { value: certificate.certificateArn });

@@ -1,4 +1,6 @@
 cdk/node_modules
 email-subscribe-form/node_modules
 cdk/cdk.out
+site/*
+node_modules
 
