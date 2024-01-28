@@ -47,7 +47,7 @@ function SubscribeForm() {
           onChange={handleEmailChange}
         />
         <button  className="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-r" type="submit" >Register Your Interest</button>
-        <p className="message text-blue-800 text-sm md:text-base lg:text-lg px-4 py-2">{message}</p>
+        <p className="message text-yellow-400 text-sm md:text-base lg:text-lg px-4 py-2">{message}</p>
       </form>
   );
 }
