@@ -54,10 +54,10 @@ function SubscribeForm() {
 
 export default function RegisterInterest() {
   return (
-    <section className="bg-gray-200 py-8" id="register">
+    <section className="lincolnHack-purple py-8 mt-4" id="register">
     <div className="container mx-auto text-center">
-        <h2 className="uppercase text-3xl font-bold mb-4 text-pretty">Interested in LincolnHack?</h2>
-        <p className="mb-6">Sign up now to stay updated and be the first to know when registration opens!</p>
+        <h2 className="uppercase text-3xl font-bold mb-4 text-pretty text-white">Interested in LincolnHack?</h2>
+        <p className="mb-6 text-white">Sign up now to stay updated and be the first to know when registration opens!</p>
         <SubscribeForm />
     </div>
 </section>
