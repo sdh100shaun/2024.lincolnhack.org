@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 function SubscribeForm() {
   const [email, setEmail ] = React.useState('');
-  const [message, SetMessage ] = React.useState('');
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -18,7 +18,7 @@ function SubscribeForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email , created: new Date()}),
         mode: 'cors',
       });
   

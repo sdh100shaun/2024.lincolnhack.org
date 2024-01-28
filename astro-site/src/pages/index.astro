@@ -5,7 +5,7 @@ import Supporters from '../components/Supporters.astro';
 import Partners from '../components/Partners.astro';
 import ImpAnimation from '../components/ImpAnimation.astro';
 import Intro from '../components/Intro.astro';
-// import RegisterInterest from '../components/RegisterInterest.jsx';
+import RegisterInterest from '../components/RegisterInterest.jsx';
 ---
 
 <Layout title="LincolnHack 2024">
@@ -19,21 +19,21 @@ import Intro from '../components/Intro.astro';
         </div>
     </main>
 
+    <RegisterInterest client:only="react"></RegisterInterest>
+
   
     <section class="bg-gray-200">
-        <div class="container mx-auto text-center p-4 mt-8">
+        <div class="container mx-auto text-center p-6">
             <h2 class="uppercase text-3xl font-bold mb-4 text-pretty">Our Sponsors</h2>
             <p class="text-pretty">Lincoln<span class="font-bold">Hack</span> is made possible thanks to the generous
                 support of our valued sponsors.</p>
-            <p class="hidden md:block text-xs italic mt-4 text-pretty">Interested in sponsoring Lincoln<span
+            <p class="md:block text-xs italic mt-4 text-pretty">Interested in sponsoring Lincoln<span
                     class="font-bold">Hack</span>? We're always on the lookout for partners who share our passion for
                 technology and community.<br>Contact us to explore exciting sponsorship opportunities and join our
-                community of forward-thinkers!</p>
-
+                community of forward-thinkers! Email us at hello@lincolnhack.org</p>
 
         </div>
     </section>
-
 
 
 <GoldSponsors></GoldSponsors>
