@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 
 function SubscribeForm() {
   const [email, setEmail ] = React.useState('');
@@ -18,7 +17,7 @@ function SubscribeForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, created: new Date()}),
         mode: 'cors',
       });
   
@@ -38,15 +37,16 @@ function SubscribeForm() {
   };
   
   return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="POST">
         <input
           className="px-4 py-2 rounded-l"
           type="email"
           placeholder="Enter your email"
           value={email}
+          name="email"
           onChange={handleEmailChange}
         />
-        <button  className="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-r" type="submit">Register Your Interest</button>
+        <button  className="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-r" type="submit" >Register Your Interest</button>
         <p className="message text-blue-800 text-sm md:text-base lg:text-lg px-4 py-2">{message}</p>
       </form>
   );
