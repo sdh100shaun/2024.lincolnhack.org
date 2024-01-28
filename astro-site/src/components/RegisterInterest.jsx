@@ -12,12 +12,12 @@ function SubscribeForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://api.2024.lincolnhack.org/contact/', {
+      const response = await fetch('https://api.2024.lincolnhack.org/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, created: new Date()}),
+        body: JSON.stringify({ email, created: Math.floor(Date.now() / 1000).toString()}),
         mode: 'cors',
       });
   
