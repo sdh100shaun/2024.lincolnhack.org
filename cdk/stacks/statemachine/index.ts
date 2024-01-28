@@ -50,6 +50,7 @@ export class StateMachineStack extends cdk.Stack {
             partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
             tableName: 'LincolnHackMailingList',
             removalPolicy: cdk.RemovalPolicy.RETAIN_ON_UPDATE_OR_DELETE,
+            sortKey: { name: 'created', type: dynamodb.AttributeType.NUMBER },
         });
 
         
@@ -57,7 +58,8 @@ export class StateMachineStack extends cdk.Stack {
         const putItem = new stepfunctions_tasks.DynamoPutItem(this, 'PutItem', {
             table: db,
             item: {
-                email: stepfunctions_tasks.DynamoAttributeValue.fromString(stepfunctions.JsonPath.stringAt('$.body.email.email')),
+                email: stepfunctions_tasks.DynamoAttributeValue.fromString(stepfunctions.JsonPath.stringAt('$.email')),
+                created: stepfunctions_tasks.DynamoAttributeValue.fromNumber(stepfunctions.JsonPath.numberAt('$.created')),
             },
             resultPath: '$.PutItemResult',
         });
@@ -67,16 +69,7 @@ export class StateMachineStack extends cdk.Stack {
             stateMachineName: 'ContactFormStateMachine',
             stateMachineType: stepfunctions.StateMachineType.EXPRESS,
             definitionBody: stepfunctions.DefinitionBody.fromChainable(new stepfunctions.Pass(this, 'StartState', {
-                result: stepfunctions.Result.fromObject({
-                    statusCode: 200,
-                    // return input from task in body   
-                    body:   {   
-                        "message": "Thanks for signing up to the LincolnHack mailing list",
-                        "email": {"email":stepfunctions.TaskInput.fromJsonPathAt('$.input.email') },
-                    },
-                }),
-                
-                
+                resultPath : stepfunctions.JsonPath.DISCARD,
             }).next(putItem)),
         });
     
