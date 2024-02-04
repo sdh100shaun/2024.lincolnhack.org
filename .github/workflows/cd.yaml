@@ -1,4 +1,4 @@
-name: CDK Deploy
+name: Release and Deploy
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 
 jobs:
   deploy:
@@ -26,12 +27,15 @@ jobs:
       with:
         tag: true
  
-    - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@master
-        with:
-          role-to-assume:  ${{ secrets.AWS_ROLE_TO_ASSUME }} 
-          role-session-name: GitHubDeploy
-          aws-region: us-east-1
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: us-east-1
+
+    - name: Get the version
+      id: version
+      run: echo ${{ github.sha}}
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
