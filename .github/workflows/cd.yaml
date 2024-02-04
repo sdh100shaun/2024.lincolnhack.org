@@ -1,4 +1,4 @@
-name: CDK Deploy
+name: Cd - Release and Deploy
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
         description: 'Version to deploy'
         required: true
         default: 'latest'
-        
+
 permissions:
   contents: write
   pull-requests: write
