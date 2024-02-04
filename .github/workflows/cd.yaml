@@ -18,8 +18,11 @@ jobs:
       run:
         working-directory: ./cdk
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
     - name: "Create release"
-      uses: "./.github/actions/github/release/create@main"
+      uses: "./.github/actions/github/release@main"
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
     
