@@ -1,9 +1,9 @@
-name: Release and Deploy 
+name:  Deploy latest release
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
+  
 
 permissions:
   contents: write
@@ -11,39 +11,9 @@ permissions:
   id-token: write
 
 jobs:
-  
-  create-release:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: /
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Bump version and push tag
-      id: bump
-      uses: anothrNick/github-tag-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true
-      with:
-        message: "Bump version to ${{ steps.bump.outputs.new_tag }}"
-        branch: main
-        force: true
-      
-        
-      
-      
-    - name: "Create release"
-      uses: "./.github/actions/github/release"
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
-    
 
   deployment-site:
     runs-on: ubuntu-latest
-    if: contains(github.event.issue.labels.*.name, 'deploy-site')
     defaults:
       run:
         working-directory: ./cdk
@@ -83,7 +53,6 @@ jobs:
   deployment-infra:
     runs-on: ubuntu-latest
     needs: create-release
-    if: contains(github.event.issue.labels.*.name, 'deploy-infra')
     environment: prod
     defaults:
       run:
