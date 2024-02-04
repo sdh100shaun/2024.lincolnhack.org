@@ -24,14 +24,15 @@ jobs:
     - name: Bump version and push tag
       id: bump
       uses: anothrNick/github-tag-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
+      with:
         message: "Bump version to ${{ steps.bump.outputs.new_tag }}"
         branch: main
         force: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+        
       
       
     - name: "Create release"
