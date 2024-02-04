@@ -27,16 +27,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
-      with:
-        message: "Bump version to ${{ steps.bump.outputs.new_tag }}"
-        branch: main
-        force: true
+      output:
+        tag: ${{ steps.bump.outputs.tag }}
       
-        
-      
-      
-    - name: "Create release"
+    - name: Create release
       uses: "./.github/actions/github/release"
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
     
+    - name: status
+      run: echo "Release created at for tag ${{ steps.bump.outputs.tag }} at ${{ steps.create-release.outputs.RELEASE_HTML_URL }}"
