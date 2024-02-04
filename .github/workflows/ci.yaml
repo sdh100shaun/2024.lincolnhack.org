@@ -45,11 +45,12 @@ jobs:
   upload-artifact:
     runs-on: ubuntu-latest
     needs: build-and-test
-    working-directory: /
+    defaults:
+      run:
+        working-directory: ./site
     steps:
       - name: zip and upload to s3
         run: |
-          cd ./site
           zip -r latest-site-artifact.zip .
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact.zip
         
