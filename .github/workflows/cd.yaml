@@ -21,6 +21,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: check pr sha
+      run: echo ${{ github.event.before }}
+      run: echo ${{ github.event.pull_request.base.sha }}
+
     # Update version in package.json according to the tag
     - name: Check package version
       uses: technote-space/package-version-check-action@v1
@@ -33,9 +37,8 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         aws-region: us-east-1
 
-    - name: Get the version
-      id: version
-      run: echo ${{ github.sha}}
+    - name: run cdk build
+      run: npm run build
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
