@@ -42,9 +42,10 @@ jobs:
    
       
     - name: get the latest artefact
+      working-directory: /
       run: |
         mkdir site
-        aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip site --recursive
+        aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip ./site/latest-site-artifact.zip --recursive
         cd site
         unzip latest-site-artifact.zip .
 
