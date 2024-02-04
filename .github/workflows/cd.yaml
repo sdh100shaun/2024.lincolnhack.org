@@ -26,7 +26,7 @@ jobs:
       uses: anothrNick/github-tag-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        with_v: true
+        WITH_V: true
         message: "Bump version to ${{ steps.bump.outputs.new_tag }}"
         branch: main
         force: true
@@ -59,10 +59,11 @@ jobs:
       run: npm run build
       
     - name: get the latest artefact
-      uses: actions/download-artifact@v4
-      with:
-        name: latest-site-artifact
-        path: site
+      run: |
+        mkdir site
+        aws s3 cp s3://lincolnhack-artefacts/ site --recursive
+        cd site
+        unzip latest-site-artifact.zip .
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
