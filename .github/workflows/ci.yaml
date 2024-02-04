@@ -27,6 +27,7 @@ jobs:
         uses: withastro/action@v1
         with: 
           node-version: 20
+          package-manager: "npm"
 
       - name: Install dependencies
         run: npm ci
