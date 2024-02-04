@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - main
-
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy'
+        required: true
+        default: 'latest'
+        
 permissions:
   contents: write
   pull-requests: write
@@ -36,7 +42,7 @@ jobs:
     - name: Get the version
       id: version
       run: echo ${{ github.sha}}
-      
+
     - name: Bootstrap CDK
       run: npx cdk bootstrap
 
