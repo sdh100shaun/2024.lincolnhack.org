@@ -19,9 +19,15 @@ jobs:
         working-directory: ./cdk
     steps:
     - name: "Create release"
+<<<<<<< HEAD
       uses: ".github/actions/github/release/create@main"
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
+=======
+        uses: ".github/actions/github/release/create@main"
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+>>>>>>> main
     
 
   deployment:
