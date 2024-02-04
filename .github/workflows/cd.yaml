@@ -19,12 +19,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: check pr sha
-      run: | 
-          echo ${{ github.event.before }}
-          echo ${{ github.event.pull_request.base.sha }}
+      uses: actions/checkout@v4
 
     # Update version in package.json according to the tag
     - name: Check package version
@@ -38,12 +33,17 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         aws-region: us-east-1
 
+    - name: Install cdk dependencies
+      run: npm ci
+
     - name: run cdk build
       run: npm run build
       
-    - name: Get the version
-      id: version
-      run: echo ${{ github.sha}}
+    - name: get the latest artefact
+      uses: actions/download-artifact@v2
+      with:
+        name: latest-site-artifact
+        path: site
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
