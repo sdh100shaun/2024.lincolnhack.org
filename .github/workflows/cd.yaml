@@ -26,6 +26,7 @@ jobs:
 
   deployment:
     runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'deploy-site')
     environment: prod
     defaults:
       run:
@@ -59,13 +60,6 @@ jobs:
 
     - name: Deploy site 
       run: npx cdk deploy site --require-approval never
-      if: |
-      contains(github.event.issue.labels.*.name, 'release-site') || 
-      contains(github.event.issue.labels.*.name, 'deploy-site')
-     
-    - name: Deploy infra
-      run: npx cdk deploy --all --require-approval never
-      if: |
-      contains(github.event.issue.labels.*.name, 'release-infra') ||
-      contains(github.event.issue.labels.*.name, 'deploy-infra')
+    
+      
       
