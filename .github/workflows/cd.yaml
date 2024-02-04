@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./cdk
+        working-directory: /
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -33,6 +33,7 @@ jobs:
     defaults:
       run:
         working-directory: ./cdk
+    depends-on: create-release
     steps:
 
     - name: Checkout repository
@@ -66,6 +67,7 @@ jobs:
   
   deployment-infra:
     runs-on: ubuntu-latest
+    depends-on: create-release
     if: contains(github.event.issue.labels.*.name, 'deploy-infra')
     environment: prod
     defaults:
