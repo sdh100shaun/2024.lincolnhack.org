@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,6 +20,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # Update version in package.json according to the tag
+    - name: Check package version
+      uses: technote-space/package-version-check-action@v1
+      with:
+        tag: true
+ 
     - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
