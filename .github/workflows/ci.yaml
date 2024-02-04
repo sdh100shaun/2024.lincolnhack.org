@@ -40,4 +40,18 @@ jobs:
           name: latest-site-artifact
           path: |
             site
+
+      - name: download production ready artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: latest-site-artifact
+          path: site
+
+      - name: zip and upload to s3
+        run: |
+          cd site
+          zip -r latest-site-artifact.zip .
+          aws s3 cp latest-site-artifact.zip s3://${{ secrets.S3_BUCKET_NAME }}/latest-site-artifact.zip
+        
+
            

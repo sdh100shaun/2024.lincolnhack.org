@@ -2,6 +2,7 @@ import { App } from 'aws-cdk-lib';
 import { StaticSite } from "./stacks/s3-static-site-with-cloudfront";
 import { StateMachineStack } from './stacks/statemachine';
 import OidcConnection from './stacks/oidcrole';
+import { artefactBucket } from './stacks/artefact-bucket';
 
 const app = new App();
 
@@ -45,5 +46,13 @@ new OidcConnection(app, "OidcConnection", {
           { owner: "sdh100shaun", repo: "2024.lincolnhack.org", filter: "ref:refs/heads/main" },
         ],
       });
+
+new artefactBucket(app, "artefactBucket", {
+  env: {
+    account: app.node.tryGetContext("account"),
+    region: app.node.tryGetContext("region"),
+  },
+  bucketname: "lincolnhack-artefacts",
+});
 
 app.synth();
