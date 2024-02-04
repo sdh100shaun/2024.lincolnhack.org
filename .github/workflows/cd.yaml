@@ -1,9 +1,6 @@
-name: Cd - Release and Deploy
+name: Release and Deploy
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       version:
