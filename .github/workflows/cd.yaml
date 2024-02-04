@@ -1,4 +1,4 @@
-name: Release and Deploy
+name: Release and Deploy 
 
 on:
   push:
@@ -11,22 +11,30 @@ permissions:
   id-token: write
 
 jobs:
-  deploy:
+  
+  create-release:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./cdk
-
     steps:
+    - name: "Create release"
+        uses: ".github/actions/github/release/create@main"
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+    
+
+  deployment:
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        working-directory: ./cdk
+    steps:
+
     - name: Checkout repository
       uses: actions/checkout@v4
  
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-        aws-region: us-east-1
-
     - name: Install cdk dependencies
       run: npm ci
 
@@ -42,5 +50,21 @@ jobs:
     - name: Bootstrap CDK
       run: npx cdk bootstrap
 
-    - name: Deploy
-      run: npx cdk deploy --require-approval never
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: us-east-1
+    
+
+    - name: Deploy site
+      if: |
+      contains(github.event.issue.labels.*.name, 'release-site') ||
+      contains(github.event.issue.labels.*.name, 'deploy-site')
+      run: npx cdk deploy site --require-approval never
+
+    - name: Deploy infra
+      if: |
+      contains(github.event.issue.labels.*.name, 'release-infra') ||
+      contains(github.event.issue.labels.*.name, 'deploy-infra')
+      run: npx cdk deploy --all --require-approval never
