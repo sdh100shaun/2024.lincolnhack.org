@@ -12,4 +12,3 @@ updates:
    directory: "./cdk"
    schedule:
      interval: weekly
-```
