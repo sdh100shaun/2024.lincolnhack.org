@@ -32,23 +32,25 @@ jobs:
 
     - name: run cdk build
       run: npm run build
-      
-    - name: get the latest artefact
-      run: |
-        mkdir site
-        aws s3 cp s3://lincolnhack-artefacts/ site --recursive
-        cd site
-        unzip latest-site-artifact.zip .
 
-    - name: Bootstrap CDK
-      run: npx cdk bootstrap
-
+    
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         aws-region: us-east-1
-    
+   
+      
+    - name: get the latest artefact
+      run: |
+        mkdir site
+        aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip site --recursive
+        cd site
+        unzip latest-site-artifact.zip .
+
+    - name: Bootstrap CDK
+      run: npx cdk bootstrap
+ 
 
     - name: Deploy site 
       run: npx cdk deploy site --require-approval never
