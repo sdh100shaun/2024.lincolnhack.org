@@ -44,7 +44,7 @@ jobs:
     - name: get the latest artefact
       working-directory: /
       run: |
-        mkdir site
+        mkdir ./site
         aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip ./site/latest-site-artifact.zip --recursive
         cd site
         unzip latest-site-artifact.zip .
@@ -61,6 +61,9 @@ jobs:
   deployment-infra:
     runs-on: ubuntu-latest
     environment: prod
+    matrix:
+      stack: ["StateMachine"]
+
     defaults:
       run:
         working-directory: ./cdk
@@ -86,5 +89,5 @@ jobs:
     
 
     - name: Deploy infra 
-      run: npx cdk deploy --all --require-approval never
+      run: npx cdk deploy  --require-approval never "${{ matrix.stack }}"
       
