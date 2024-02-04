@@ -51,6 +51,7 @@ jobs:
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
+      working-directory: ./cdk
  
 
     - name: Deploy site 
