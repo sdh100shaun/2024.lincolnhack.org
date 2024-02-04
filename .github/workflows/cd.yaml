@@ -40,7 +40,11 @@ jobs:
 
     - name: run cdk build
       run: npm run build
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> main
     - name: Get the version
       id: version
       run: echo ${{ github.sha}}
