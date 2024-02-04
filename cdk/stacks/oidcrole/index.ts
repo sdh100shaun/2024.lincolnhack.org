@@ -7,12 +7,12 @@ export interface OIDCRoleProps extends cdk.StackProps{
   oidcProviderUrl: string;
   clientIds: string[];
   thumbprints: string[];
-  readonly repositoryConfig: { owner: string; repo: string; filter?: string }[];
+  readonly repositoryConfig: { owner: string; repo: string; filter?: string };
 }
   
+ 
 
-
-class OidcConnection extends cdk.Stack {
+export default class OidcConnection extends cdk.Stack {
 
 constructor(construct: Construct, name: string, props: OIDCRoleProps) {
     
@@ -20,13 +20,11 @@ constructor(construct: Construct, name: string, props: OIDCRoleProps) {
 
     const provider = new GithubActionsIdentityProvider(this, "GithubProvider");
    
-    
-    
     const deployRole = new GithubActionsRole(this, "DeployRole", {
         provider: provider,
-        owner: props.repositoryConfig[0].owner,
-        repo: props.repositoryConfig[0].repo,
-        filter: props.repositoryConfig[0].filter,
+        owner: props.repositoryConfig.owner,
+        repo: props.repositoryConfig.repo,
+        filter: props.repositoryConfig.filter,
         roleName: "LincolnHack2024DeployRole",
         description: "This role deploys stuff to AWS",
         maxSessionDuration: cdk.Duration.hours(2),
@@ -34,8 +32,6 @@ constructor(construct: Construct, name: string, props: OIDCRoleProps) {
 
     deployRole.addManagedPolicy(
         iam.ManagedPolicy.fromAwsManagedPolicyName("AdministratorAccess")
-    );
-        }   
-    
+        );
     }
-export default OidcConnection;
+}

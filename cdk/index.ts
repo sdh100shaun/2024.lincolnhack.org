@@ -42,9 +42,8 @@ new OidcConnection(app, "OidcConnection", {
     oidcProviderUrl: "https://token.actions.githubusercontent.com",
     clientIds: ["sts.amazonaws.com"],
     thumbprints: ["a031c46782e6e6c662c2c87c76da9aa62ccabd8e"],
-    repositoryConfig: [
-          { owner: "sdh100shaun", repo: "2024.lincolnhack.org", filter: "ref:refs/heads/main" },
-        ],
+    repositoryConfig: 
+          { owner: "sdh100shaun", repo: "2024.lincolnhack.org", filter: "*" }
       });
 
 new artefactBucket(app, "artefactBucket", {
