@@ -21,12 +21,12 @@
   "author": "shaun@shaunharre.co.uk",
   "license": "MIT",
   "dependencies": {
-    "aws-cdk": "^2.103.1",
-    "aws-cdk-lib": "^2.103.1"
+    "aws-cdk": "^2.126.0",
+    "aws-cdk-lib": "^2.126.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5",
+    "@types/node": "^20.11.16",
     "aws-cdk-github-oidc": "^2.4.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   }
 }
