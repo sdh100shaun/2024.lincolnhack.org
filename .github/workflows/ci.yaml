@@ -1,4 +1,4 @@
-name: Ci - Build and Test
+name: Ci - Build Test and upload artefact
 
 on:
   pull_request:
