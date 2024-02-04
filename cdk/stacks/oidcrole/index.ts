@@ -1,7 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import * as iam from 'aws-cdk-lib/aws-iam';
-
+import { GithubActionsIdentityProvider, GithubActionsRole } from "aws-cdk-github-oidc";
+import * as iam from 'aws-cdk-lib/aws-iam'; 
 
 export interface OIDCRoleProps extends cdk.StackProps{
   oidcProviderUrl: string;
@@ -18,40 +18,24 @@ constructor(construct: Construct, name: string, props: OIDCRoleProps) {
     
     super(construct, name);
 
-    const oidcProvider = new iam.OpenIdConnectProvider(this, 'OIDCProvider', {
-        url: props.oidcProviderUrl,
-        clientIds: props.clientIds,
-        thumbprints: props.thumbprints,
+    const provider = new GithubActionsIdentityProvider(this, "GithubProvider");
+   
+    
+    
+    const deployRole = new GithubActionsRole(this, "DeployRole", {
+        provider: provider,
+        owner: props.repositoryConfig[0].owner,
+        repo: props.repositoryConfig[0].repo,
+        filter: props.repositoryConfig[0].filter,
+        roleName: "LincolnHack2024DeployRole",
+        description: "This role deploys stuff to AWS",
+        maxSessionDuration: cdk.Duration.hours(2),
     });
 
-    const iamRole: iam.Role = new iam.Role(this, 'OIDCRole',{
-        assumedBy: new iam.WebIdentityPrincipal(oidcProvider.openIdConnectProviderArn),
-        roleName: 'GitHubOIDCRole',
-        managedPolicies: [
-            iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')
-        ],
-        description: 'Role for GitHub OIDC to carry out cdk actions',
-        maxSessionDuration: cdk.Duration.minutes(60)
-    });
-
-    const iamRepoDeployAccess = props.repositoryConfig.map(
-        (r) => `repo:${r.owner}/${r.repo}:${r.filter ?? '*'}`
-      );
-      
-      // grant only requests coming from a specific GitHub repository.
-      //attach this to the role
-        iamRole.addToPolicy(
-            new iam.PolicyStatement({
-            effect: iam.Effect.ALLOW,
-            actions: ['sts:AssumeRoleWithWebIdentity'],
-            resources: [iamRole.roleArn],
-            conditions: {
-                StringLike: {
-                [`${props.oidcProviderUrl}:sub`]: iamRepoDeployAccess,
-                },
-            },
-            })
-        );
+    deployRole.addManagedPolicy(
+        iam.ManagedPolicy.fromAwsManagedPolicyName("AdministratorAccess")
+    );
+        }   
+    
     }
-}
 export default OidcConnection;

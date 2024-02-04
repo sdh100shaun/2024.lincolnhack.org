@@ -3,4 +3,6 @@ email-subscribe-form/node_modules
 cdk/cdk.out
 site/*
 node_modules
+astro-site/node_modules
+astro-site/.cache
 

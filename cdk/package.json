@@ -9,7 +9,8 @@
     "cdk": "cdk",
     "deploy": "cdk deploy",
     "destroy": "cdk destroy",
-    "synth": "cdk synth"
+    "synth": "cdk synth",
+    "test": "echo test"
   },
   "keywords": [
     "aws",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.5",
+    "aws-cdk-github-oidc": "^2.4.1",
     "typescript": "^5.2.2"
   }
 }
