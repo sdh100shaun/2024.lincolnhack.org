@@ -19,14 +19,14 @@ jobs:
         working-directory: ./cdk
     steps:
     - name: "Create release"
-        uses: ".github/actions/github/release/create@main"
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      uses: ".github/actions/github/release/create@main"
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
     
 
   deployment:
     runs-on: ubuntu-latest
-    environment: production
+    environment: prod
     defaults:
       run:
         working-directory: ./cdk
@@ -57,14 +57,15 @@ jobs:
         aws-region: us-east-1
     
 
-    - name: Deploy site
-      if: |
-      contains(github.event.issue.labels.*.name, 'release-site') ||
-      contains(github.event.issue.labels.*.name, 'deploy-site')
+    - name: Deploy site 
       run: npx cdk deploy site --require-approval never
-
+      if: |
+      contains(github.event.issue.labels.*.name, 'release-site') || 
+      contains(github.event.issue.labels.*.name, 'deploy-site')
+     
     - name: Deploy infra
+      run: npx cdk deploy --all --require-approval never
       if: |
       contains(github.event.issue.labels.*.name, 'release-infra') ||
       contains(github.event.issue.labels.*.name, 'deploy-infra')
-      run: npx cdk deploy --all --require-approval never
+      
