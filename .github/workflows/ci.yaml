@@ -65,6 +65,6 @@ jobs:
       - name: zip and upload to s3
         run: |
           zip -r latest-site-artifact.zip .
-          aws s3 sync . s3://lincolnhack-artefacts/latest-site-artifact.zip        
+          aws s3 sync latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact.zip        
 
            
