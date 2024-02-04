@@ -33,7 +33,7 @@ jobs:
     defaults:
       run:
         working-directory: ./cdk
-    depends-on: create-release
+    needs: create-release
     steps:
 
     - name: Checkout repository
@@ -67,7 +67,7 @@ jobs:
   
   deployment-infra:
     runs-on: ubuntu-latest
-    depends-on: create-release
+    needs: create-release
     if: contains(github.event.issue.labels.*.name, 'deploy-infra')
     environment: prod
     defaults:
