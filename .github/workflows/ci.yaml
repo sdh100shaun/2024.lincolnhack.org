@@ -25,7 +25,7 @@ jobs:
           path: ./astro-site
           node-version: 20
           package-manager: npm
-        working-directory: ./astro-site
+       
 
       - name: Install dependencies
         run: npm ci
