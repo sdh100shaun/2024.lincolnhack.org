@@ -8,7 +8,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,10 +17,10 @@ jobs:
           node-version: 20
 
       - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-        aws-region: us-east-1
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-east-1
 
       - name: set up astro
         shell: "bash"
@@ -52,6 +51,7 @@ jobs:
         with:
           name: latest-site-artifact
           path: site
+          
   upload-artifact:
     runs-on: ubuntu-latest
     needs: build-and-test
