@@ -25,10 +25,10 @@ jobs:
 
       - name: set up astro
         uses: withastro/action@v1
-        with: 
-          path: ./astro-site
-          node-version: 20
-          package-manager: npm
+          with: 
+            path: ./astro-site
+            node-version: 20
+            package-manager: npm
         
       - name: Install dependencies
         run: npm ci
