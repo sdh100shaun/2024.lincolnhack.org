@@ -24,12 +24,13 @@ jobs:
           node-version: 20
 
       - name: set up astro
-        working-directory: ./astro-site
         uses: withastro/action@v1
         with: 
           path: ./astro-site
           node-version: 20
           package-manager: npm
+        working-directory: ./astro-site
+        
 
       - name: Install dependencies
         run: npm ci
