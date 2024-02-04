@@ -32,6 +32,7 @@ jobs:
 
     - name: run cdk build
       run: npm run build
+<<<<<<< HEAD
 
     
     - name: Configure AWS Credentials
@@ -40,6 +41,8 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         aws-region: us-east-1
    
+=======
+>>>>>>> main
       
     - name: get the latest artefact
       run: |
@@ -50,7 +53,17 @@ jobs:
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
+<<<<<<< HEAD
  
+=======
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: us-east-1
+    
+>>>>>>> main
 
     - name: Deploy site 
       run: npx cdk deploy site --require-approval never
