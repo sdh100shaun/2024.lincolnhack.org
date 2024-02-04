@@ -20,12 +20,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    # Update version in package.json according to the tag
-    - name: Check package version
-      uses: technote-space/package-version-check-action@v1
-      with:
-        tag: true
  
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
@@ -40,7 +34,7 @@ jobs:
       run: npm run build
       
     - name: get the latest artefact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: latest-site-artifact
         path: site
