@@ -47,10 +47,8 @@ jobs:
           name: latest-site-artifact
           path: site
 
-      - name: zip and upload to s3
+      - name: upload to s3
         run: |
-          cd site
-          zip -r latest-site-artifact.zip .
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact.zip
         
 
