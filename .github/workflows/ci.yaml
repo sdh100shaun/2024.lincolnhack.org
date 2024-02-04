@@ -47,7 +47,7 @@ jobs:
     needs: build-and-test
     defaults:
       run:
-        working-directory: ./site
+        working-directory: site
     steps:
       - name: zip and upload to s3
         run: |
