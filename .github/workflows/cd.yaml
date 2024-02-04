@@ -33,6 +33,10 @@ jobs:
           role-session-name: GitHubDeploy
           aws-region: us-east-1
 
+    - name: Get the version
+      id: version
+      run: echo ${{ github.sha}}
+      
     - name: Bootstrap CDK
       run: npx cdk bootstrap
 
