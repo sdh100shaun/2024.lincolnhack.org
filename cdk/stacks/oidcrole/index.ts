@@ -28,7 +28,6 @@ constructor(construct: Construct, name: string, props: OIDCRoleProps) {
         repo: props.repositoryConfig[0].repo,
         filter: props.repositoryConfig[0].filter,
         roleName: "LincolnHack2024DeployRole",
-        thumbprints: props.repositoryConfig[0].thumbprints, 
         description: "This role deploys stuff to AWS",
         maxSessionDuration: cdk.Duration.hours(2),
     });
