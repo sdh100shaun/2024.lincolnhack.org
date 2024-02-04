@@ -19,15 +19,14 @@ jobs:
         working-directory: ./cdk
     steps:
     - name: "Create release"
-      uses: ".github/actions/github/release/create@main"
+      uses: "./.github/actions/github/release/create@main"
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
     
 
-  deployment:
+  deployment-site:
     runs-on: ubuntu-latest
     if: contains(github.event.issue.labels.*.name, 'deploy-site')
-    environment: prod
     defaults:
       run:
         working-directory: ./cdk
@@ -61,5 +60,35 @@ jobs:
     - name: Deploy site 
       run: npx cdk deploy site --require-approval never
     
-      
+  
+  deployment-infra:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'deploy-infra')
+    environment: prod
+    defaults:
+      run:
+        working-directory: ./cdk
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+ 
+    - name: Install cdk dependencies
+      run: npm ci
+
+    - name: run cdk build
+      run: npm run build
+
+    - name: Bootstrap CDK
+      run: npx cdk bootstrap
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: us-east-1
+    
+
+    - name: Deploy infra 
+      run: npx cdk deploy --all --require-approval never
       
