@@ -9,14 +9,17 @@ permissions:
   contents: write
   pull-requests: write
   id-token: write
+  deployments: write
 
 jobs:
 
   deployment-site:
     runs-on: ubuntu-latest
+    environment: prod
     defaults:
       run:
         working-directory: ./cdk
+       
     steps:
 
     - name: Checkout repository
