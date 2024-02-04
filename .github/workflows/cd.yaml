@@ -17,7 +17,6 @@ jobs:
     defaults:
       run:
         working-directory: ./cdk
-    needs: create-release
     steps:
 
     - name: Checkout repository
@@ -52,7 +51,6 @@ jobs:
   
   deployment-infra:
     runs-on: ubuntu-latest
-    needs: create-release
     environment: prod
     defaults:
       run:
