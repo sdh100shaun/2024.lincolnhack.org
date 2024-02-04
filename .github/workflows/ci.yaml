@@ -51,7 +51,7 @@ jobs:
         run: |
           cd site
           zip -r latest-site-artifact.zip .
-          aws s3 cp latest-site-artifact.zip s3://${{ secrets.S3_BUCKET_NAME }}/latest-site-artifact.zip
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact.zip
         
 
            
