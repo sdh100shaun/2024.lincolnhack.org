@@ -9,7 +9,8 @@
     "cdk": "cdk",
     "deploy": "cdk deploy",
     "destroy": "cdk destroy",
-    "synth": "cdk synth"
+    "synth": "cdk synth",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "aws",

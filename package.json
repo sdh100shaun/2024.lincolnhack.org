@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/glob": "^0.4.0",
+    "@types/node": "^20.11.16"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "rm test/*.js && tsc test/* && node test/action.test.js"
+  }
+}
