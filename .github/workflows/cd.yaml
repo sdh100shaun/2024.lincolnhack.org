@@ -30,6 +30,8 @@ jobs:
         message: "Bump version to ${{ steps.bump.outputs.new_tag }}"
         branch: main
         force: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       
     - name: "Create release"
