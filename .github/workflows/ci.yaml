@@ -19,14 +19,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          
       - name: set up astro
-        uses: withastro/action@v1
-        with: 
-          path: ./astro-site
-          node-version: 20
-          package-manager: npm
-       
-
+        shell: "bash"
+        working-directory: ./astro-site
+        run: |
+          npm install
+          npm run build
+          
+  
       - name: Install dependencies
         run: npm ci
         working-directory: ./cdk
