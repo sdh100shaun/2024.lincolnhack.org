@@ -42,7 +42,7 @@ new OidcConnection(app, "OidcConnection", {
     clientIds: ["sts.amazonaws.com"],
     thumbprints: ["a031c46782e6e6c662c2c87c76da9aa62ccabd8e"],
     repositoryConfig: [
-          { owner: "sdh100shaun", repo: "lincolnhack2024", filter: "main" },
+          { owner: "sdh100shaun", repo: "lincolnhack2024", filter: "ref:refs/heads/main" },
         ],
       });
 
