@@ -36,5 +36,5 @@ jobs:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
     
     - name: status
-      if: contains(github.event.pull_request.labels.*.name, 'deploy') 
+      if: contains(github.event.pull_request.labels.*.name, 'deploy') == false
       run: exit 0
