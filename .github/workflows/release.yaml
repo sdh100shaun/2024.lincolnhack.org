@@ -33,7 +33,6 @@ jobs:
     - name: run cdk build
       run: npm run build
 
-    
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
