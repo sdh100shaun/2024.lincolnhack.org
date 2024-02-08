@@ -81,7 +81,7 @@ jobs:
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
-      needs: get-artefact
+      depends-on: get-artefact
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
