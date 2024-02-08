@@ -48,7 +48,8 @@ jobs:
         sudo -E mkdir ./site
         sudo -E aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip ./site/latest-site-artifact.zip --recursive
         cd site
-        sudo -E unzip latest-site-artifact.zip .
+        sudo -E unzip ./site/latest-site-artifact.zip ./site
+        rm ./site/latest-site-artifact.zip
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
