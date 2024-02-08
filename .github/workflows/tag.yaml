@@ -30,7 +30,6 @@ jobs:
         WITH_V: true
       
     - name: Create release
-      // only run if label is present for deployment
       if: contains(github.event.pull_request.labels.*.name, 'deploy')
       uses: "./.github/actions/github/release"
       with:
