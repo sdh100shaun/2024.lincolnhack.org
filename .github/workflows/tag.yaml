@@ -36,4 +36,5 @@ jobs:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
     
     - name: status
-      run: echo "Release created at for tag ${{ steps.bump.outputs.tag }} at ${{ steps.create-release.outputs.RELEASE_HTML_URL }}"
+      if: contains(github.event.pull_request.labels.*.name, 'deploy') 
+      run: exit 0
