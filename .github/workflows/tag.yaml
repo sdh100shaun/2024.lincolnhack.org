@@ -38,4 +38,4 @@ jobs:
     
     - name: status
       if: contains(github.event.pull_request.labels.*.name, 'deploy') == false
-      run: exit 0
+      run: exit 1
