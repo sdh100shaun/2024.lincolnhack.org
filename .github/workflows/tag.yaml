@@ -22,6 +22,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Bump version and push tag
+      if: contains(github.event.pull_request.labels.*.name, 'deploy')
       id: bump
       uses: anothrNick/github-tag-action@master
       env:
@@ -29,6 +30,7 @@ jobs:
         WITH_V: true
       
     - name: Create release
+      if: contains(github.event.pull_request.labels.*.name, 'deploy')
       uses: "./.github/actions/github/release"
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
