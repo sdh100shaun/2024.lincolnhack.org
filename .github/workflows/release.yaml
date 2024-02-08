@@ -43,11 +43,12 @@ jobs:
       
     - name: get the latest artefact
       working-directory: /
+
       run: |
-        sudo mkdir ./site
-        sudo aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip ./site/latest-site-artifact.zip --recursive
+        sudo -E mkdir ./site
+        sudo -E aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip ./site/latest-site-artifact.zip --recursive
         cd site
-        sudo unzip latest-site-artifact.zip .
+        sudo -E unzip latest-site-artifact.zip .
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
