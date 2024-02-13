@@ -12,4 +12,4 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/build
+    uses: ./.github/workflows/build.yaml
