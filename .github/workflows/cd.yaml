@@ -15,7 +15,7 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    uses: ./github/workflows/build.yaml
+    uses: ./github/workflows/build.yaml@main
 
   upload-artifact:
     runs-on: ubuntu-latest
@@ -44,9 +44,9 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'deploy')
-    uses: ./.github/workflows/tag.yaml
+    uses: ./.github/workflows/tag.yaml@main
 
   release:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'deploy')
-    uses : ./.github/workflows/release.yaml
+    uses : ./.github/workflows/release.yaml@main
