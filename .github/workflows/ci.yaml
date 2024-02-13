@@ -11,4 +11,4 @@ permissions:
 jobs:
   build-and-test:
     name: build-and-test
-    uses: .github/workflows/build.yaml
+    uses: .github/workflows/build.yaml@main
