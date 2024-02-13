@@ -18,6 +18,8 @@ jobs:
 
   upload-artifact:
     runs-on: ubuntu-latest
+    needs: 
+      - build-and-test
     if: contains(github.event.pull_request.labels.*.name, 'deploy')
     defaults:
       run:
@@ -41,11 +43,13 @@ jobs:
           zip -r latest-site-artifact.zip .
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact.zip
   tag:
-    runs-on: ubuntu-latest
+    needs: 
+      - upload-artifact
     if: contains(github.event.pull_request.labels.*.name, 'deploy')
     uses: ./.github/workflows/tag.yaml
 
   release:
-    runs-on: ubuntu-latest
+    needs: 
+      - tag
     if: contains(github.event.pull_request.labels.*.name, 'deploy')
     uses : ./.github/workflows/release.yaml
