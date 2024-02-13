@@ -15,6 +15,7 @@ jobs:
   deployment-site:
     runs-on: ubuntu-latest
     environment: prod
+    concurrency: prod
     defaults:
       run:
         working-directory: ./cdk
@@ -23,6 +24,8 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        ref: ${{ github.default_branch}}
  
     - name: Install cdk dependencies
       run: npm ci
