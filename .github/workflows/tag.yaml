@@ -2,6 +2,7 @@ name: Release and tag
 
 on:
   push:
+    types: [ labeled ]
     branches:
       - main
 
