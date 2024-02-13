@@ -9,6 +9,5 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+    name: build-and-test
     uses: ./.github/workflows/build.yaml
