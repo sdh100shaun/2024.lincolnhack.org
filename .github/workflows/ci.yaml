@@ -10,5 +10,5 @@ permissions:
 
 jobs:
   build-and-test:
-    name: build-and-test
+    name: build
     uses: ./.github/workflows/build.yaml
