@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    name: build
     uses: ./.github/workflows/build.yaml
 
   upload-artifact:
