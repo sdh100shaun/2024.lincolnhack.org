@@ -2,11 +2,12 @@ name:  Deploy latest release
 
 on:
  workflow_call:
- push:
-   branches:
-     - main
+  inputs:
+    tag:
+      required: true
+      type: string
+ 
            
-
 permissions:
   contents: write
   pull-requests: write
@@ -49,7 +50,7 @@ jobs:
       id: get-artefact
       run: |
         sudo -E mkdir ./site
-        sudo -E aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip ./site/latest-site-artifact.zip --recursive
+        sudo -E aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact-${{inputs.tag}}.zip ./site/latest-site-artifact.zip --recursive
         sudo -E unzip ./site/latest-site-artifact.zip ./site
         rm ./site/latest-site-artifact.zip
 
