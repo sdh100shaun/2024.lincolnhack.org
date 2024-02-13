@@ -2,7 +2,10 @@ name:  Deploy latest release
 
 on:
  workflow_call:
-        
+ push:
+   branches:
+     - main
+           
 
 permissions:
   contents: write
@@ -26,7 +29,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         ref: ${{ github.default_branch}}
- 
+        fetch-depth: 0
+
     - name: Install cdk dependencies
       run: npm ci
 
