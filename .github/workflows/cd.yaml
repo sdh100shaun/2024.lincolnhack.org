@@ -15,7 +15,7 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    uses: ./github/workflows/build.yaml
+    uses: ./.github/workflows/build.yaml
 
   upload-artifact:
     runs-on: ubuntu-latest
