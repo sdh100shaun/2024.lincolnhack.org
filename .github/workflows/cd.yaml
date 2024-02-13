@@ -45,11 +45,11 @@ jobs:
   tag:
     needs: 
       - upload-artifact
-    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
     uses: ./.github/workflows/tag.yaml
 
   release:
     needs: 
       - tag
-    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
     uses : ./.github/workflows/release.yaml
