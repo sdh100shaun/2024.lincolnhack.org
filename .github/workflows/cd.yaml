@@ -1,0 +1,52 @@
+name: CD - Deploy and release 
+
+on:
+  push:
+    types: [ labeled ]
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+  deployments: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/build.yaml
+
+  upload-artifact:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    defaults:
+      run:
+        working-directory: ./site
+    steps:
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-east-1
+
+      - name: Download artefact
+        uses: actions/download-artifact@v4
+        with:
+          name: latest-site-artifact
+          path: site
+
+      - name: zip and upload to s3
+        run: |
+          zip -r latest-site-artifact.zip .
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact.zip
+  tag:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    uses: ./.github/workflows/tag.yaml
+
+  release:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    uses : ./.github/workflows/release.yaml

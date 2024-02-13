@@ -1,9 +1,7 @@
 name: Release and tag 
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 permissions:
   contents: write
@@ -35,7 +33,4 @@ jobs:
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
       
-    
-    - name: status
-      if: contains(github.event.pull_request.labels.*.name, 'deploy') == false
-      run: exit 1
+  

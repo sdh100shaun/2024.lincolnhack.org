@@ -1,10 +1,7 @@
 name:  Deploy latest release
 
 on:
- workflow_run:
-    workflows: [Release and tag]
-    types:
-      - completed
+ workflow_call:
         
 
 permissions:
