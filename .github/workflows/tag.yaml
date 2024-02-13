@@ -28,7 +28,6 @@ jobs:
         WITH_V: true
       
     - name: Create release
-      if: contains(github.event.pull_request.labels.*.name, 'deploy')
       uses: "./.github/actions/github/release"
       with:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
