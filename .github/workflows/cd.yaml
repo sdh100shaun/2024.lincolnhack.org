@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
       - build-and-test
-    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'release')
     defaults:
       run:
         working-directory: ./site
