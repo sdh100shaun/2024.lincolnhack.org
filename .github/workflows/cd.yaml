@@ -2,7 +2,6 @@ name: CD - Deploy and release
 
 on:
   push:
-    types: [ labeled ]
     branches:
       - main
 
