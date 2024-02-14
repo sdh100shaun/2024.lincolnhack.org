@@ -62,7 +62,7 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.6.0
         id: check-tag
         with: 
-          tag: ${{steps.bump.outputs.new_tag}}
+          tag: ${{steps.tag.outputs.new_tag}}
         
 
   release:
