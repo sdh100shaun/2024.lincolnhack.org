@@ -24,7 +24,8 @@ jobs:
       - name: tag-for-release
         id: tag-for-release
         uses: ./.github/workflows/tag.yaml
-    
+    outputs:
+      new_tag: ${{ steps.tag-for-release.outputs.new_tag }}
   upload-artifact:
     runs-on: ubuntu-latest
     needs: 
@@ -44,13 +45,13 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact-${{ steps.tag-for-release.outputs.new_tag }}
+          name: latest-site-artifact-${{ jobs.tag.new_tag }}
           path: site
 
       - name: zip and upload to s3
         run: |
           zip -r latest-site-artifact.zip .
-          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ jobs.tag.tag-for-release.outputs.new_tag }}.zip
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ jobs.tag.new_tag }}.zip
   
   tag-exists:
     runs-on: ubuntu-latest
@@ -61,7 +62,7 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.6.0
         id: check-tag
         with: 
-          tag: ${{jobs.tag.tag-for-release.outputs.new_tag}}
+          tag: ${{jobs.tag.new_tag}}
         
 
   release:
@@ -70,4 +71,4 @@ jobs:
       - upload-artifact
     uses: ./.github/workflows/release.yaml
     with:
-      tag: ${{ jobs.tag.tag-for-release.outputs.new_tag }}
+      tag: ${{ jobs.tag.new_tag }}
