@@ -3,7 +3,7 @@ name:  Deploy latest release
 on:
  workflow_call:
   inputs:
-    tag:
+    tagged:
       required: true
       type: string
  
