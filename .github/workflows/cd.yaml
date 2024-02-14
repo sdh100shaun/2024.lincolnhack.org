@@ -17,10 +17,12 @@ jobs:
     uses: ./.github/workflows/build.yaml
 
   tag:
+    runs-on: ubuntu-latest
     needs: 
       - build-and-test
     steps:
       - name: tag-for-release
+        id: tag-for-release
         uses: ./.github/workflows/tag.yaml
     
   upload-artifact:
