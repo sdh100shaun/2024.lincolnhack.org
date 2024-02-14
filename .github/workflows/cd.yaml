@@ -52,7 +52,7 @@ jobs:
         working-directory: ./site
         run: |
           zip -r latest-site-artifact.zip .
-          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ jobs.tag.new_tag }}.zip
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ env.new_tag }}.zip
   
   tag-exists:
     runs-on: ubuntu-latest
@@ -63,7 +63,7 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.6.0
         id: check-tag
         with: 
-          tag: ${{jobs.tag.new_tag}}
+          tag: ${{env.new_tag}}
         
 
   release:
@@ -72,4 +72,4 @@ jobs:
       - upload-artifact
     uses: ./.github/workflows/release.yaml
     with:
-      tag: ${{ jobs.tag.new_tag }}
+      tag: ${{ env.new_tag }}
