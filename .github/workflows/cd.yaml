@@ -68,4 +68,4 @@ jobs:
       - upload-artifact
     uses: ./.github/workflows/release.yaml
     with:
-      tag: ${{ jobs.tag.outputs.new_tag }}
+      tag: ${{ steps.tag-for-release.outputs.new_tag }}
