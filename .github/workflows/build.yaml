@@ -24,7 +24,13 @@ jobs:
         run: |
           npm install
           npm run build
- 
+
+      - name: upload artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-site-artifact
+          path: site
+      
       - name: Install dependencies
         run: npm ci
         working-directory: ./cdk

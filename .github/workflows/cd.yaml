@@ -34,8 +34,8 @@ jobs:
     defaults:
       run:
         working-directory: ./site
-    steps:
 
+    steps:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -45,10 +45,11 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact-${{ jobs.tag.new_tag }}
+          name: latest-site-artifact
           path: site
 
       - name: zip and upload to s3
+        working-directory: ./site
         run: |
           zip -r latest-site-artifact.zip .
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ jobs.tag.new_tag }}.zip
