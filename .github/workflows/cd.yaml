@@ -137,6 +137,7 @@ jobs:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       tagged: ${{ needs.tag.outputs.new_tag }}
 =======
     uses : ./.github/workflows/release.yaml
@@ -161,3 +162,6 @@ jobs:
 =======
       tag: ${{ env.new_tag }}
 >>>>>>> d5ff471 (wip)
+=======
+      tagged: ${{ env.new_tag }}
+>>>>>>> fc94fa5 (tired)
