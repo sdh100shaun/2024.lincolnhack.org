@@ -57,6 +57,7 @@ jobs:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ needs.tag.outputs.new_tag }}.zip
 =======
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ env.new_tag }}.zip
@@ -73,6 +74,9 @@ jobs:
 =======
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ jobs.tag.new_tag }}.zip
 >>>>>>> 4145008 (amend jobs output syntax)
+=======
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ env.new_tag }}.zip
+>>>>>>> d5ff471 (wip)
   
   tag-exists:
     runs-on: ubuntu-latest
@@ -96,6 +100,7 @@ jobs:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           tag: ${{needs.tag.outputs.new_tag}}
 =======
           tag: ${{jobs.tag.outputs.new_tag}}
@@ -109,6 +114,9 @@ jobs:
 =======
           tag: ${{jobs.tag.new_tag}}
 >>>>>>> 4145008 (amend jobs output syntax)
+=======
+          tag: ${{env.new_tag}}
+>>>>>>> d5ff471 (wip)
         
 =======
           tag: ${{ env.new_tag }}
@@ -126,6 +134,7 @@ jobs:
 <<<<<<< HEAD
     uses: ./.github/workflows/release.yaml
     with:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       tagged: ${{ needs.tag.outputs.new_tag }}
@@ -149,3 +158,6 @@ jobs:
 =======
       tag: ${{ jobs.tag.new_tag }}
 >>>>>>> 4145008 (amend jobs output syntax)
+=======
+      tag: ${{ env.new_tag }}
+>>>>>>> d5ff471 (wip)
