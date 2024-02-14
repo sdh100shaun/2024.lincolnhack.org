@@ -45,7 +45,7 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact-${{ jobs.tag.new_tag }}
+          name: latest-site-artifact
           path: site
 
       - name: zip and upload to s3
