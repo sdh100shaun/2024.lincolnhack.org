@@ -45,7 +45,7 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact-${{ steps.tag.outputs.new_tag }}
+          name: latest-site-artifact-${{ jobs.tag.outputs.new_tag }}
           path: site
 
       - name: zip and upload to s3
@@ -80,7 +80,11 @@ jobs:
         with: 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           tag: ${{needs.tag.outputs.new_tag}}
+=======
+          tag: ${{jobs.tag.outputs.new_tag}}
+>>>>>>> 2f13fa6 (get jobs output)
         
 =======
           tag: ${{ env.new_tag }}
@@ -107,5 +111,9 @@ jobs:
 =======
     uses: ./.github/workflows/release.yaml
     with:
+<<<<<<< HEAD
       tag: ${{ steps.tag.outputs.new_tag }}
 >>>>>>> 630b517 (merge conflict)
+=======
+      tag: ${{ jobs.tag.outputs.new_tag }}
+>>>>>>> 2f13fa6 (get jobs output)
