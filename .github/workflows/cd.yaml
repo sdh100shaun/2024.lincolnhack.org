@@ -45,13 +45,14 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact-${{ steps.tag-for-release.outputs.new_tag }}
+          name: latest-site-artifact-${{ jobs.tag.new_tag }}
           path: site
 
       - name: zip and upload to s3
         working-directory: ./site
         run: |
           zip -r latest-site-artifact.zip .
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -69,6 +70,9 @@ jobs:
 =======
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ jobs.tag.tag-for-release.outputs.new_tag }}.zip
 >>>>>>> eb5161d (tweak job output)
+=======
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ jobs.tag.new_tag }}.zip
+>>>>>>> 4145008 (amend jobs output syntax)
   
   tag-exists:
     runs-on: ubuntu-latest
@@ -91,6 +95,7 @@ jobs:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           tag: ${{needs.tag.outputs.new_tag}}
 =======
           tag: ${{jobs.tag.outputs.new_tag}}
@@ -101,6 +106,9 @@ jobs:
 =======
           tag: ${{jobs.tag.tag-for-release.outputs.new_tag}}
 >>>>>>> eb5161d (tweak job output)
+=======
+          tag: ${{jobs.tag.new_tag}}
+>>>>>>> 4145008 (amend jobs output syntax)
         
 =======
           tag: ${{ env.new_tag }}
@@ -118,6 +126,7 @@ jobs:
 <<<<<<< HEAD
     uses: ./.github/workflows/release.yaml
     with:
+<<<<<<< HEAD
 <<<<<<< HEAD
       tagged: ${{ needs.tag.outputs.new_tag }}
 =======
@@ -137,3 +146,6 @@ jobs:
 =======
       tag: ${{ jobs.tag.tag-for-release.outputs.new_tag }}
 >>>>>>> eb5161d (tweak job output)
+=======
+      tag: ${{ jobs.tag.new_tag }}
+>>>>>>> 4145008 (amend jobs output syntax)
