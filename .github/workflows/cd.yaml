@@ -22,10 +22,6 @@ jobs:
       - build-and-test
     uses: ./.github/workflows/tag.yaml
     
-    steps:
-      - name: display tag
-        run: echo "The new tag is ${{ steps.tag.outputs.new_tag }}"
-
   upload-artifact:
     runs-on: ubuntu-latest
     needs: 
