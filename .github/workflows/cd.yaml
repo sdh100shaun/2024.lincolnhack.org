@@ -17,9 +17,14 @@ jobs:
     uses: ./.github/workflows/build.yaml
 
   tag:
+    id: tag
     needs: 
       - build-and-test
     uses: ./.github/workflows/tag.yaml
+    
+    steps:
+      - name: display tag
+        run: echo "The new tag is ${{ steps.tag.outputs.new_tag }}"
 
   upload-artifact:
     runs-on: ubuntu-latest
@@ -40,28 +45,30 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact-${{ env.new_tag }}
+          name: latest-site-artifact-${{ steps.tag.outputs.new_tag }}
           path: site
 
       - name: zip and upload to s3
         run: |
           zip -r latest-site-artifact.zip .
-          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ env.new_tag }}.zip
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ steps.tag.outputs.new_tag }}.zip
   
   tag-exists:
     runs-on: ubuntu-latest
     needs: 
       - upload-artifact
+      - tag
     steps:
       - uses: mukunku/tag-exists-action@v1.6.0
         id: check-tag
         with: 
-          tag: ${{ env.new_tag }}
+          tag: ${{steps.tag.outputs.new_tag}}
+        
 
   release:
     if: steps.check-tag.outputs.exists == 'true'
     needs: 
       - upload-artifact
-    uses : ./.github/workflows/release.yaml
+    uses: ./.github/workflows/release.yaml
     with:
-      tag: ${{ env.new_tag }}
+      tag: ${{ steps.tag.outputs.new_tag }}
