@@ -45,7 +45,7 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact-${{ env.new_tag }}
+          name: latest-site-artifact-${{ steps.tag.outputs.new_tag }}
           path: site
 
       - name: zip and upload to s3
@@ -53,34 +53,48 @@ jobs:
         run: |
           zip -r latest-site-artifact.zip .
 <<<<<<< HEAD
+<<<<<<< HEAD
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ needs.tag.outputs.new_tag }}.zip
 =======
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ env.new_tag }}.zip
 >>>>>>> dce865c (added release conditions)
+=======
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ steps.tag.outputs.new_tag }}.zip
+>>>>>>> 630b517 (merge conflict)
   
   tag-exists:
     runs-on: ubuntu-latest
     needs: 
       - upload-artifact
 <<<<<<< HEAD
+<<<<<<< HEAD
       - tag
 =======
 >>>>>>> dce865c (added release conditions)
+=======
+      - tag
+>>>>>>> 630b517 (merge conflict)
     steps:
       - uses: mukunku/tag-exists-action@v1.6.0
         id: check-tag
         with: 
+<<<<<<< HEAD
 <<<<<<< HEAD
           tag: ${{needs.tag.outputs.new_tag}}
         
 =======
           tag: ${{ env.new_tag }}
 >>>>>>> dce865c (added release conditions)
+=======
+          tag: ${{steps.bump.outputs.new_tag}}
+        
+>>>>>>> 630b517 (merge conflict)
 
   release:
     if: steps.check-tag.outputs.exists == 'true'
     needs: 
       - upload-artifact
+<<<<<<< HEAD
 <<<<<<< HEAD
     uses: ./.github/workflows/release.yaml
     with:
@@ -90,3 +104,8 @@ jobs:
     with:
       tag: ${{ env.new_tag }}
 >>>>>>> dce865c (added release conditions)
+=======
+    uses: ./.github/workflows/release.yaml
+    with:
+      tag: ${{ steps.tag.outputs.new_tag }}
+>>>>>>> 630b517 (merge conflict)
