@@ -45,31 +45,48 @@ jobs:
       - name: Download artefact
         uses: actions/download-artifact@v4
         with:
-          name: latest-site-artifact
+          name: latest-site-artifact-${{ env.new_tag }}
           path: site
 
       - name: zip and upload to s3
         working-directory: ./site
         run: |
           zip -r latest-site-artifact.zip .
+<<<<<<< HEAD
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ needs.tag.outputs.new_tag }}.zip
+=======
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ env.new_tag }}.zip
+>>>>>>> dce865c (added release conditions)
   
   tag-exists:
     runs-on: ubuntu-latest
     needs: 
       - upload-artifact
+<<<<<<< HEAD
       - tag
+=======
+>>>>>>> dce865c (added release conditions)
     steps:
       - uses: mukunku/tag-exists-action@v1.6.0
         id: check-tag
         with: 
+<<<<<<< HEAD
           tag: ${{needs.tag.outputs.new_tag}}
         
+=======
+          tag: ${{ env.new_tag }}
+>>>>>>> dce865c (added release conditions)
 
   release:
     if: steps.check-tag.outputs.exists == 'true'
     needs: 
       - upload-artifact
+<<<<<<< HEAD
     uses: ./.github/workflows/release.yaml
     with:
       tagged: ${{ needs.tag.outputs.new_tag }}
+=======
+    uses : ./.github/workflows/release.yaml
+    with:
+      tag: ${{ env.new_tag }}
+>>>>>>> dce865c (added release conditions)
