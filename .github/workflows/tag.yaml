@@ -25,6 +25,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
+      output:
+        new_tag: ${{ steps.bump.outputs.new_tag }}
       
     - name: Create release
       uses: "./.github/actions/github/release"
