@@ -51,11 +51,7 @@ jobs:
         working-directory: ./site
         run: |
           zip -r latest-site-artifact.zip .
-<<<<<<< HEAD
           aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ needs.tag-for-release.outputs.new_tag }}.zip
-=======
-          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ needs.tag.outputs.new_tag }}.zip
->>>>>>> main
 
   tag-exists:
     runs-on: ubuntu-latest
