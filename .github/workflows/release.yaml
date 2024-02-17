@@ -1,12 +1,13 @@
 name:  Deploy latest release
 
 on:
- workflow_run:
-    workflows: [Release and tag]
-    types:
-      - completed
-        
-
+ workflow_call:
+  inputs:
+    tagged:
+      required: true
+      type: string
+ 
+           
 permissions:
   contents: write
   pull-requests: write
@@ -18,6 +19,7 @@ jobs:
   deployment-site:
     runs-on: ubuntu-latest
     environment: prod
+    concurrency: prod
     defaults:
       run:
         working-directory: ./cdk
@@ -26,7 +28,10 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v4
- 
+      with:
+        ref: ${{ github.default_branch}}
+        fetch-depth: 0
+
     - name: Install cdk dependencies
       run: npm ci
 
@@ -45,7 +50,7 @@ jobs:
       id: get-artefact
       run: |
         sudo -E mkdir ./site
-        sudo -E aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact.zip ./site/latest-site-artifact.zip --recursive
+        sudo -E aws s3 cp s3://lincolnhack-artefacts/latest-site-artifact-${{inputs.tag}}.zip ./site/latest-site-artifact.zip --recursive
         sudo -E unzip ./site/latest-site-artifact.zip ./site
         rm ./site/latest-site-artifact.zip
 
@@ -81,7 +86,6 @@ jobs:
 
     - name: Bootstrap CDK
       run: npx cdk bootstrap
-      depends-on: get-artefact
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
