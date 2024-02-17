@@ -1,0 +1,75 @@
+name: CD - Deploy and release 
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+  deployments: write
+
+jobs:
+  build-and-test:
+    name: build
+    uses: ./.github/workflows/build.yaml
+
+  tag:
+    runs-on: ubuntu-latest
+    needs: 
+      - build-and-test
+    steps:
+      - name: tag-for-release
+        id: tag-for-release
+        uses: ./.github/workflows/tag.yaml
+    outputs:
+      new_tag: ${{ steps.tag-for-release.outputs.new_tag }}
+  upload-artifact:
+    runs-on: ubuntu-latest
+    needs: 
+      - build-and-test
+      - tag
+    defaults:
+      run:
+        working-directory: ./site
+
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-east-1
+
+      - name: Download artefact
+        uses: actions/download-artifact@v4
+        with:
+          name: latest-site-artifact
+          path: site
+
+      - name: zip and upload to s3
+        working-directory: ./site
+        run: |
+          zip -r latest-site-artifact.zip .
+          aws s3 cp latest-site-artifact.zip s3://lincolnhack-artefacts/latest-site-artifact-${{ env.new_tag }}.zip
+  
+  tag-exists:
+    runs-on: ubuntu-latest
+    needs: 
+      - upload-artifact
+      - tag
+    steps:
+      - uses: mukunku/tag-exists-action@v1.6.0
+        id: check-tag
+        with: 
+          tag: ${{env.new_tag}}
+        
+
+  release:
+    if: steps.check-tag.outputs.exists == 'true'
+    needs: 
+      - upload-artifact
+    uses: ./.github/workflows/release.yaml
+    with:
+      tagged: ${{ env.new_tag }}

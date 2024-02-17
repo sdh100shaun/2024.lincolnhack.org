@@ -8,11 +8,11 @@ const images = await Astro.glob("/src/images/*").then(files => {
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
     {/* Slides */}
     {images.map((image, index) => (
-      <div class="flex items-center justify-center bg-white shadow-md rounded-lg overflow-hidden">
+      <div class={`flex items-center justify-center bg-white shadow-md rounded-lg overflow-hidden ${index >= images.length - 2 ? 'md:hidden lg:flex' : ''}`}>
         <Image 
-          class="w-full h-48 object-cover" // Adjust the height as needed
-          width="300"
-	        height="300"
+          class="w-full h-36 object-cover" // Adjust the height as needed
+          width="500"
+	        height="500"
           src={image} 
           alt={`Gallery image ${index + 1}`} 
           loading="lazy"
