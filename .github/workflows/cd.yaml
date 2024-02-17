@@ -24,8 +24,7 @@ jobs:
       - name: tag-for-release
         id: tag-for-release
         uses: ./.github/workflows/tag.yaml
-    outputs:
-      new_tag: ${{ steps.tag-for-release.outputs.new_tag }}
+        
   upload-artifact:
     runs-on: ubuntu-latest
     needs: 
