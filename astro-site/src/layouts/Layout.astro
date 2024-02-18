@@ -1,6 +1,8 @@
 ---
 import Header from '../components/Header.astro';
 import Gallery from '../components/Gallery.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 import { AstroFont } from 'astro-font';
 
 interface Props {
@@ -47,13 +49,8 @@ const { title } = Astro.props;
 	<body class="bg-gray-100">
 		<Header></Header>
 		<slot />
-		<Gallery />
-		<footer class="lincolnHack-purple text-white p-4">
-			<div class="container mx-auto">
-				<p class="text-sm text-center italic">&copy; copyright Lincoln<span class="font-bold">Hack</span> 2011 -
-					2024.</p>
-			</div>
-		</footer>
+		
+	<Footer></Footer>
 	</body>
 </html>
 
@@ -72,6 +69,15 @@ const { title } = Astro.props;
             font-weight: 400;
             font-style: normal;
         }
+		footer {
+			background-color: #4C4398;
+			min-height: 11em;
+		}
+		footer a {
+			color: #fff;
+			text-decoration: none;
+			font-weight: 500;
+		}
 
         .lincolnHack-purple {
             background-color: #4C4398;
