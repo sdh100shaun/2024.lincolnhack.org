@@ -75,7 +75,11 @@ const FAQs = [
   },
   {
     "question": "How do I unsubscribe from LincolnHack emails?",
-    "answer": "Send an email to hello@lincolnhack.org with subject unsubscribe."
+    "answer": "Send an email to <a href='mailto:hello@lincolnhack.org' class='underline hover:italic'>hello@lincolnhack.org</a> with subject unsubscribe."
+  },
+  {
+    "question": "Who drew your imp mascot?",
+    "answer": "The imp is designed by award winning illustrator and animator, <a href='https://www.upwork.com/freelancers/~01b699030b936f4b0e' class='underline hover:italic'>Steve Reynolds</a>.<br>Steve currently illustrates and animates the popular YouTube channel <a href='https://www.youtube.com/@SideQuestYT' class='underline hover:italic'>SideQuest</a>."
   }
 ];
 
@@ -100,6 +104,6 @@ function generateId(question) {
       class={`py-5 ${index !== FAQs.length - 1 ? 'border-b border-gray-200' : ''}`}
       >
         <h3 class="text-lg leading-6 font-medium text-gray-900">{index + 1}. {faq.question}</h3>
-        <p class="mt-2 text-sm text-gray-600">{faq.answer}</p>
+        <p class="mt-2 text-sm text-gray-600" set:html={faq.answer}></p>
       </div>
     ))}
