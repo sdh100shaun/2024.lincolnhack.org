@@ -6,4 +6,6 @@ node_modules
 astro-site/node_modules
 astro-site/.cache
 !**/.gitkeep
+attendee/attendee-manager/app/attendee-app/.env
+attendee/attendee-manager/app/attendee-app/node_modules
 
