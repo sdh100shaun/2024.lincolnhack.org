@@ -57,8 +57,10 @@ export default function RegisterInterest() {
     <section className="lincolnHack-purple py-8 mt-4 px-4" id="register">
     <div className="container mx-auto text-center">
         <h2 className="uppercase text-3xl font-bold mb-4 text-pretty text-white">Interested in LincolnHack?</h2>
-        <p className="mb-6 text-white">Sign up now to stay updated and be the first to know when registration opens!</p>
-        <SubscribeForm />
+        <p className="mb-6 text-white"> Get a ticket now </p>
+        <form method="get" action="https://www.ticketsource.co.uk/lincolnhack-digital-lincoln">
+          <button  className="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-r" type="submit" >Register Now</button>
+        </form>
     </div>
 </section>
   );
