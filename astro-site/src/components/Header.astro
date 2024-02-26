@@ -34,7 +34,7 @@ const { selected } = Astro.props;
 
 <script>
 function updateCountdown(visible = true) {
-const eventDate = new Date("February, 26 2024 00:00:00").getTime();
+const eventDate = new Date("February, 26 2024 12:30:00").getTime();
 const now = new Date().getTime();
 const difference = eventDate - now;
 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -51,16 +51,18 @@ if(visible){
 }
 
 
+console.log(parseInt(seconds));
 
-if (difference < 0) {
-    clearInterval(interval);
-    document.getElementById("countdown").innerHTML = '<div class="button-dark-purple text-white font-bold py-2 px-4 text-center">Registration Now Open!</div>';
-}
+if (parseInt(seconds) < 0) {
+    console.log("Registration Now Open!");
+        document.getElementById("countdown").innerHTML = '<div class="button-dark-purple text-white font-bold py-2 px-4 text-center">Registration Now Open!</div>';
+         clearInterval(interval);
+    }
 }
 
 document.getElementById("countdown").style.display = "none";
 updateCountdown();
 // Update the countdown every 1 second
-const interval = setInterval(updateCountdown, 1000);
+const interval = setInterval(updateCountdown(), 1000);
 
 </script>
