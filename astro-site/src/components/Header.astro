@@ -143,16 +143,18 @@ if(visible){
 }
 
 
+console.log(parseInt(seconds));
 
-if (difference < 0) {
-    clearInterval(interval);
-    document.getElementById("countdown").innerHTML = '<div class="button-dark-purple text-white font-bold py-2 px-4 text-center">Registration Now Open!</div>';
-}
+if (parseInt(seconds) < 0) {
+    console.log("Registration Now Open!");
+        document.getElementById("countdown").innerHTML = '<div class="button-dark-purple text-white font-bold py-2 px-4 text-center">Registration Now Open!</div>';
+         clearInterval(interval);
+    }
 }
 
 document.getElementById("countdown").style.display = "none";
 updateCountdown();
 // Update the countdown every 1 second
-const interval = setInterval(updateCountdown, 1000);
+const interval = setInterval(updateCountdown(), 1000);
 
 </script>
