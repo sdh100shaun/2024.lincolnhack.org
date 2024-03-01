@@ -1,19 +1,15 @@
----
-const { selected } = Astro.props;
----
+<!-- Burger icon and main navigation unchanged -->
 <header class="uppercase lincolnHack-purple text-white p-4">
-    <div class="container mx-auto flex justify-between items-center">
+    <div class="container mx-auto px-4 flex justify-between items-center">
         <a href="/" class="shareTechFont text-lg font-bold">LincolnHack 2024</a>
-        <nav>
-            <ul class="flex space-x-4">
-                <li><a href="/" class="hover:text-blue-300">Home</a></li>
-                <li><a href="/faq/index.html" class="hover:text-blue-300">FAQ</a></li>
-                <li>
-                   <!-- <a href="/#register"
-                        class="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded transition duration-300">
-                        Register Now
-                    </a> -->
-                </li>
+        <button id="burger" aria-label="Toggle menu" class="block lg:hidden">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+        <nav id="nav-menu" class="flex">
+            <ul class="flex flex-col md:flex-row list-none lg:space-x-4">
+                <li><a href="/" class="nav-link hover:text-purple-300">Home</a></li>
+                <li><a href="/faq" class="nav-link hover:text-purple-300">FAQ</a></li>
+               <!--  <li><a href="/challenge" class="nav-link hover:text-purple-300">Challenges</a></li>   -->
             </ul>
         </nav>
     </div>
@@ -30,10 +26,106 @@ const { selected } = Astro.props;
 </div>
 
 
+<style>
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-link:hover {
+            color: #818CF8; /* Lighter purple for hover effect */
+        }
+
+        #nav-menu {
+            display: none;
+        }
+
+
+        @media (max-width: 768px) {
+            #burger {
+                display: block;
+            }
+
+            #nav-menu {
+                visibility: hidden;
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(-100%);
+                z-index: 20;
+            }
+
+            #nav-menu.active {
+                visibility: visible;
+                transform: translateX(0);
+            }
+
+            #nav-menu ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            #nav-menu ul li {
+                margin: 20px 0;
+            }
+
+            #nav-menu ul li a {
+                color: white;
+                font-size: 24px;
+                text-decoration: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            #nav-menu {
+                display: flex;
+            }
+
+            #nav-menu ul {
+                display: flex;
+                list-style-type: none;
+                padding: 0;
+            }
+
+            #nav-menu ul li {
+                margin: 0 10px;
+            }
+
+            #nav-menu ul li a {
+                color: white;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+            #burger {
+                display: none;
+            }
+
+        }
+
+        
+</style>
 
 
 <script>
-function updateCountdown(visible = true) {
+    document.getElementById('burger').addEventListener('click', function() {
+        document.getElementById('nav-menu').classList.toggle('active');
+    });
+
+    function updateCountdown(visible = true) {
 const eventDate = new Date("February, 26 2024 12:30:00").getTime();
 const now = new Date().getTime();
 const difference = eventDate - now;
