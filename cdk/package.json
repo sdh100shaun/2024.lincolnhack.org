@@ -18,7 +18,7 @@
     "typescript",
     "lincolnhack"
   ],
-  "author": "shaun@shaunharre.co.uk",
+  "author": "shaun@shaunhare.co.uk",
   "license": "MIT",
   "dependencies": {
     "aws-cdk": "^2.128.0",
