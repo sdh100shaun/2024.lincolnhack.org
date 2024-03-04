@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosHeaders } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosError, AxiosHeaders, AxiosResponse } from 'axios';
 
 export class ApiClient {
     constructor(
@@ -7,7 +7,7 @@ export class ApiClient {
         private readonly authToken: string = '',
     ) {}
 
-    public async get(endpoint = '', params?: object, signal?: AbortSignal): Promise<any> {
+    public async get(endpoint = '', params?: object, signal?: AbortSignal): Promise<AxiosResponse | undefined> {
         try {
             const client = this.createClient(params);
             const response = await client.get(endpoint, { signal });
@@ -19,7 +19,7 @@ export class ApiClient {
         }
     }
 
-    public async post(endpoint = '', data?: unknown, signal?: AbortSignal): Promise<any> {
+    public async post(endpoint = '', data?: unknown, signal?: AbortSignal): Promise<AxiosResponse | undefined> {
         try {
             const client = this.createClient();
             const response = await client.post(endpoint, data, { signal });
@@ -31,11 +31,11 @@ export class ApiClient {
         }
     }
 
-    private createClient(params: object = {}): AxiosInstance {
+    public createClient(params?: object): AxiosInstance {
         const config: AxiosRequestConfig = {
             baseURL: this.baseUrl,
             headers: this.headers,
-            params: params,
+            params: params || {},
         };
         if (this.authToken) {
             this.headers.setAuthorization('Bearer ' + this.authToken);
