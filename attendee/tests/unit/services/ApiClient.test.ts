@@ -7,11 +7,8 @@ import axios, { AxiosHeaders, AxiosInstance, AxiosError } from 'axios';
 describe('ApiClient', function () {
     it('should call axios.get with the correct parameters', async () => {
         // Arrange
-        const baseUrl = 'https://example.com';
-        const headers = new AxiosHeaders();
-        const authToken = 'authToken';
-        const endpoint = '/endpoint';
-        const params = { param: 'value' };
+        const { baseUrl, headers, authToken, endpoint, params } = httpConfig();
+      
         const signal = new AbortController().signal;
         const response = { data: 'response' };
         const axiosInstance = axios.create();
@@ -28,11 +25,7 @@ describe('ApiClient', function () {
 
     it('should call axios.post with the correct parameters', async () => {
         // Arrange
-        const baseUrl = 'https://example.com';
-        const headers = new AxiosHeaders();
-        const authToken = 'authToken';
-        const endpoint = '/endpoint';
-        const params = { param: 'value' };
+        const { baseUrl, headers, authToken, endpoint, params } = httpConfig();
         const signal = new AbortController().signal;
         const response = { data: 'response' };
         const axiosInstance = axios.create();
@@ -49,11 +42,8 @@ describe('ApiClient', function () {
 
     it('should call error when invalid response', () => {
         // Arrange
-        const baseUrl = 'https://example.com';
-        const headers = new AxiosHeaders();
-        const authToken =   'authToken';
-        const endpoint = '/endpoint';
-        const params = { param: 'value' };
+        const { baseUrl, headers, authToken, endpoint, params } = httpConfig();
+      
         const signal = new AbortController().signal;
         const axiosInstance = axios.create();
         const axiosCreateMock = axiosInstance as jest.Mocked<AxiosInstance>;
@@ -69,11 +59,8 @@ describe('ApiClient', function () {
 
     it ('should call error with status code when invalid response', () => {
         // Arrange
-        const baseUrl = 'https://example.com';
-        const headers = new AxiosHeaders();
-        const authToken =   'authToken';
-        const endpoint = '/endpoint';
-        const params = { param: 'value' };
+        const { baseUrl, headers, authToken, endpoint, params } = httpConfig();
+      
         const signal = new AbortController().signal;
         const axiosInstance = axios.create();
         const axiosCreateMock = axiosInstance as jest.Mocked<AxiosInstance>;
@@ -86,4 +73,13 @@ describe('ApiClient', function () {
             expect(error.message).toBe('Request failed: Request failed with status code 404');
         });
     });
+
+    function httpConfig() {
+        const baseUrl = 'https://example.com';
+        const headers = new AxiosHeaders();
+        const authToken = 'authToken';
+        const endpoint = '/endpoint';
+        const params = { param: 'value' };
+        return { baseUrl, headers, authToken, endpoint, params };
+    }
 });
