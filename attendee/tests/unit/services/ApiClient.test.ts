@@ -66,4 +66,23 @@ describe('ApiClient', function () {
             expect(error.message).toBe('Request failed: Request failed');
         });
     });
+
+    it ('should call error with status code when invalid response', () => {
+        // Arrange
+        const baseUrl = 'https://example.com';
+        const headers = new AxiosHeaders();
+        const authToken =   'authToken';
+        const endpoint = '/endpoint';
+        const params = { param: 'value' };
+        const signal = new AbortController().signal;
+        const axiosInstance = axios.create();
+        const axiosCreateMock = axiosInstance as jest.Mocked<AxiosInstance>;
+        jest.spyOn(axios, 'create').mockReturnValue(axiosCreateMock);
+        const apiClient = new ApiClient(baseUrl, headers, authToken);
+        jest.spyOn(apiClient, 'createClient').mockReturnValue(axiosInstance);
+        jest.spyOn(axiosInstance, 'post').mockRejectedValue(new AxiosError('Request failed with status code 404','404'));
+        apiClient.post(endpoint, params, signal).catch((error) => {
+            expect(error).toBeInstanceOf(Error);
+            expect(error.message).toBe('Request failed with status code 404: Request failed with status code 404');
+        });
 });
