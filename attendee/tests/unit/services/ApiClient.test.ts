@@ -83,6 +83,7 @@ describe('ApiClient', function () {
         jest.spyOn(axiosInstance, 'post').mockRejectedValue(new AxiosError('Request failed with status code 404','404'));
         apiClient.post(endpoint, params, signal).catch((error) => {
             expect(error).toBeInstanceOf(Error);
-            expect(error.message).toBe('Request failed with status code 404: Request failed with status code 404');
+            expect(error.message).toBe('Request failed: Request failed with status code 404');
         });
+    });
 });
