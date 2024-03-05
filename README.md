@@ -1,14 +1,12 @@
-# Lincolnhack
+## Lincolnhack
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Description
+### Description
 
-LincolnHack is a free 24-hour programming competition that aims to showcase and celebrate digital talent in Lincoln, UK.
+LincolnHack is a free 24-hour programming competition that aims to showcase and celebrate digital talent in Lincoln, UK. This is the site repository.
 
-This is the site repository.
-
-## Table of Contents
+### Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -16,30 +14,25 @@ This is the site repository.
 - [License](#license)
 - [Contact](#contact)
 
-## Installation
+### Installation
 
-To be able to reproduce this site you will require 
+To be able to reproduce this site you will require:
 
-Nodejs 20
++ Nodejs 20
++ CDK 
++ An AWS account to host it 
 
-CDK 
-
-An AWS account to host it 
-
-## Usage
-
-
-
-## Contributing
+### Contributing
 
 Guidelines for contributing to the project and how to submit pull requests.
 
-## License
+### License
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Contact
+### Contact
 
+```sh
 - Author: Shaun Hare
 - Email: hello@lincolnhack.org
 - GitHub: [sdh100shaun](https://github.com/sdh100shaun)
@@ -48,3 +41,12 @@ This project is licensed under the [MIT License](LICENSE).
 - Author: Rob Willie
 - Email: hello@lincolnhack.org
 - GitHub: [bigWillie](https://github.com/bigWillie)
+
+- Author: Finbarrs Oketunji
+- Email: hello@lincolnhack.org
+- GitHub: [0xnu](https://github.com/0xnu)
+```
+
+### Copyright
+
+(c) 2024 [Lincoln Hack](https://2024.lincolnhack.org/).
