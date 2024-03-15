@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 function DietaryForm() {
-  const [email, setEmail ] = React.useState('');
-  const [dietaryRequirements, setDietary ] = React.useState('');
-  const [message, SetMessage] = React.useState('');
-  const [ticketRef, setTicketRef] = React.useState('');
+  const [email, setEmail ] = useState('');
+  const [dietaryRequirements, setDietary ] = useState('');
+  const [message, SetMessage] = useState('');
+  const [ticketRef, setTicketRef] = useState('');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -53,11 +53,11 @@ function DietaryForm() {
     }
   };
 
-  const Output = ({ messageTxt })=> <p className="text-rose-600 mb-10 font-bold text-pretty">{messageTxt}</p>;
+  const output = ({ messageTxt })=> <p className="text-rose-600 mb-10 font-bold text-pretty">{messageTxt}</p>;
   
   const emailInput = ({ email, handleEmailChange})=>
    <input
-    className="px-4 py-2 m-6 rounded-l block w-full text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+    className="w-80 px-4 py-2 m-6 rounded-l block w-full text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
     type="email"
     placeholder="Enter your email you used to register with."
     value={email}
@@ -70,7 +70,7 @@ function DietaryForm() {
 
   const ticketRefInput = ({ ticketRef, handleTicketRefChange})=>
   <input
-          className="px-4 py-2 m-6 rounded-l block w-full text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+          className="px-4 py-2 m-6 rounded-l block w-80 text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
           type="text"
           placeholder="Enter your ticket reference"
           value={ticketRef}
@@ -92,9 +92,9 @@ function DietaryForm() {
   const submitBtn = () => <button className="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-r" type="submit">Send Details</button>;
   return (
     <div>
-        <Output messageTxt={message} />
+        { output({ messageTxt: message }) }
         <p className="mb-10 text-lg md:text-xl"> Before you join us we need to confirm an email for each attendee so we can invite you to slack.
-        <i> So you have got multiple tickets, please make sure you fill out the form for each person attending using the unique ticket reference they have against their name.</i>
+        <i> So if you have got multiple tickets, please make sure you fill out the form for each person attending using the unique ticket reference they have against their name.</i>
         </p>
       <form onSubmit={handleSubmit} method="POST">
         {label('Confirm your email.', 'email')}
