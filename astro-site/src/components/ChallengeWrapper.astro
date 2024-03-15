@@ -35,3 +35,17 @@ const { left, right } = Astro.props;
       right: 10px; /* Adjust distance from the right edge */
     }
 </style>
+
+<script>
+    document.addEventListener('keydown', function(event) {
+      const leftArrow = document.querySelector('.fixed-arrow-left');
+      const rightArrow = document.querySelector('.fixed-arrow-right');
+  
+      if (event.key === 'ArrowLeft' && leftArrow) {
+        window.location.href = leftArrow.getAttribute('href');
+      } else if (event.key === 'ArrowRight' && rightArrow) {
+        window.location.href = rightArrow.getAttribute('href');
+      }
+    });
+  </script>
+  
