@@ -45,10 +45,9 @@ export class StateMachineStack extends cdk.Stack {
 
         });
 
-
-        const db = new dynamodb.Table(this, 'LincolnHackMailingList', {
+        const dietaryTable = new dynamodb.Table(this, 'LincolnHackDietary', {
             partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
-            tableName: 'LincolnHackMailingList',
+            tableName: 'LincolnHackDietary',
             removalPolicy: cdk.RemovalPolicy.RETAIN_ON_UPDATE_OR_DELETE,
             sortKey: { name: 'created', type: dynamodb.AttributeType.NUMBER },
         });
@@ -56,10 +55,12 @@ export class StateMachineStack extends cdk.Stack {
         
         // add a task to the current state machine to put data in dynamodb
         const putItem = new stepfunctions_tasks.DynamoPutItem(this, 'PutItem', {
-            table: db,
+            table: dietaryTable,
             item: {
                 email: stepfunctions_tasks.DynamoAttributeValue.fromString(stepfunctions.JsonPath.stringAt('$.email')),
                 created: stepfunctions_tasks.DynamoAttributeValue.fromNumber(stepfunctions.JsonPath.numberAt('$.created')),
+                dietaryRequirements: stepfunctions_tasks.DynamoAttributeValue.fromString(stepfunctions.JsonPath.stringAt('$.dietaryRequirements')),
+                ticketReference: stepfunctions_tasks.DynamoAttributeValue.fromString(stepfunctions.JsonPath.stringAt('$.ticketRef'))
             },
             resultPath: '$.PutItemResult',
         });

@@ -1,53 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
+import ChallengeWrapper from "../components/ChallengeWrapper.astro";
 ---
-<Layout title="PageTiger: Lincoln's Beacon of Digital Innovation">
 
-<div class="max-w-4xl mx-auto mt-5 mb-5">
-
-  <div class="bg-white shadow overflow-hidden sm:rounded-lg min-h-screen">
-    <div class="w-full p-5">
-
-      <div class="text-center pt-16 pb-20">
-        <div class="flex justify-center">
-          <img src="../images/pagetiger.svg" alt="PageTiger" class="h-40 w-auto">
-        </div>
-        <h1 class="mt-12 text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl">PageTiger</h1>
-        <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
-          Pioneering Digital Innovation from Lincoln to the World.
-        </p>
-      </div>
-
-      <div class="max-w-4xl mx-auto px-4 ">
-        <p class="mb-4 text-gray-700">
-          Rooted in the historic city of Lincoln, PageTiger is at the forefront of digital document innovation. Our cutting-edge design suite transforms the way businesses engage, educate, and inform audiences worldwide.
-        </p>
-
-        <p class="mb-4 text-gray-700">
-          Not just a global technology leader, PageTiger is deeply invested in Lincoln's technological renaissance. We played a pivotal role in designing the Mosaic digital hub, a testament to our commitment to fostering a collaborative tech environment in the city.
-        </p>
-
-        <p class="mb-4 text-gray-700">
-          Our dedication extends to nurturing local talent. We are actively working with colleges and universities to develop apprenticeship programs, aiming to equip the next generation with the skills needed for success in the digital age. All of PageTiger's product development is proudly conducted in Lincoln, showcasing our city's innovation on a global stage.
-        </p>
-        
-        <p class="mb-4 text-gray-700">
-          Trusted by major brands across the globe, PageTiger's platform is a hallmark of quality and innovation. Our commitment to excellence is matched by our dedication to making Lincoln a hub of technology and creativity.
-        </p>
-      </div>
-
-      <div class="max-w-4xl mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">Challenge</h1>
-        
-        <p class="mb-4 text-gray-700">
-          To follow...
-        </p>
-      
-
-      </div>
-
+<Layout title="Pagetiger Challenge">
+  <ChallengeWrapper left="/epix-media/index.html" right="/rebel/index.html">
+    <div class="text-center pb-16">
+      <div class="flex justify-center">
+      <img src="../images/pagetiger.svg" alt="PageTiger" class="h-40 w-auto" />
     </div>
+    <p class="mt-4 max-w-3xl text-xl text-gray-500 mx-auto">
+      Pioneering Digital Innovation from Lincoln to the World.
+    </p>
   </div>
+
+
+  <div class="max-w-3xl mx-auto px-4">
+    <p class="mb-4 text-gray-700">
+      PageTiger is a leading innovator in the online publishing arena. With two UK offices in Richmond and Lincoln, the company is experiencing consistent success. The ground-breaking system has been adopted by some of the world’s biggest brands to create online communications.
+    </p>
+
+
+  </div>
+
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-4">Challenge</h1>
+
+    <p class="mb-4 text-gray-700">Stay tuned and make sure to follow us on twitter / X for the big reveal! We're keeping the details under wraps for now, but trust us, it's going to be incredibly fun!</p>
+  </div>
+  <div class="max-w-3xl mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold text-gray-900 mb-4">Prizes</h2>
+  
+    <p class="text-gray-700">
+    Gear up for the big reveal of some amazing prizes for their upcoming challenge. Get ready to be impressed!
+    </p>
 </div>
+  </ChallengeWrapper>
 </Layout>
