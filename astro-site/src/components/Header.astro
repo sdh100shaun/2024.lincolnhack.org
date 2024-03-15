@@ -142,13 +142,9 @@ if(visible){
     document.getElementById("countdown").style.display = "block";
 }
 
-
-console.log(parseInt(seconds));
-
 if (parseInt(seconds) < 0) {
-    console.log("Registration Now Open!");
-        document.getElementById("countdown").innerHTML = '<div class="button-dark-purple text-white font-bold py-2 px-4 text-center">Registration Now Open!</div>';
-         clearInterval(interval);
+    document.getElementById("countdown").innerHTML = '<div class="button-dark-purple text-white font-bold py-2 px-4 text-center">Registration Now Open!</div>';
+    clearInterval(interval);
     }
 }
 
