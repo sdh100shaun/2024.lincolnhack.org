@@ -57,7 +57,7 @@ function DietaryForm() {
   
   const emailInput = ({ email, handleEmailChange})=>
    <input
-    className="w-80 px-4 py-2 m-6 rounded-l block w-full text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+    className="w-80 px-4 py-2 m-6 rounded-l block text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
     type="email"
     placeholder="Enter your email you used to register with."
     value={email}
