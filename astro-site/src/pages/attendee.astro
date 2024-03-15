@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import DietaryRequirements from '../components/DietaryRequirements.jsx';
+import Hacker from '../components/Hacker.astro';
+---
+<Layout title="Attendee">
+
+  <div class="max-w-4xl mx-auto mt-2 mb-5">
+
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg min-h-screen">
+        <div class="w-full p-5">
+        
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-2">
+            Glad your joining us! 🎉
+        </h2>
+        <p class="text-lg md:text-xl leading-relaxed">
+            We can't wait to see you at the event. Please fill out the form below so we can make sure you enjoy the weekend, get what you need to eat and drink, and generally have a great time.
+        </p>
+
+        <DietaryRequirements client:only="react"></DietaryRequirements>
+        <p class="mb-10 mt-10 text-lg md:text-xl" > Familiarise yourself with the <a href="/conduct/index.html">Code of Conduct</a> and get answers to any questions with our <a href="/faq/index.html">FAQ</a> before you attend.</p>
+        <p class="mb-10 text-lg md:text-xl"> If you still have any questions, please don't hesitate to <a href="mailto:hello@lincolnhack.org">contact us</a>.</p>
+        <p class="mb-10 text-lg md:text-xl"> We look forward to seeing you at the event!</p>
+        
+        <Hacker />
+       
+    </div>  
+   </div>
+</Layout>
+
+

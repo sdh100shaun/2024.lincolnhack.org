@@ -13,6 +13,8 @@ import { ApiClientFactory } from '../services/ClientFactory';
 
 export const lambdaHandler = async (_event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
+
+        
         return {
             statusCode: 200,
             body: JSON.stringify({
