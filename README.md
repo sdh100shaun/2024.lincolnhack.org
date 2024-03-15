@@ -34,6 +34,11 @@ An AWS account to host it
 
 Guidelines for contributing to the project and how to submit pull requests.
 
+Contributers 
+
+[rishi-raj-jain](https://github.com/rishi-raj-jain)
+[0xnu](https://github.com/0xnu)
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).

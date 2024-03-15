@@ -123,5 +123,39 @@
         document.getElementById('nav-menu').classList.toggle('active');
     });
 
+     let interval = null;  
+    
+function updateCountdown(visible = true) {
+    const eventDate = new Date("February, 26 2024 12:30:00").getTime();
+    const now = new Date().getTime();
+    const difference = eventDate - now;
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+ 
+
+    if(visible){
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+        document.getElementById("countdown").style.display = "block";
+    }
+
+
+if (parseInt(seconds) < 0) {
+         document.getElementById("countdown").innerHTML = '<div class="button-dark-purple text-white font-bold py-2 px-4 text-center">Registration Now Open!</div>';
+         if(interval !== null){
+                clearInterval(interval);
+         }
+         
+    }
+}
+
+document.getElementById("countdown").style.display = "none";
+updateCountdown(false);
+// Update the countdown every 1 second
+interval = setInterval(updateCountdown(false), 1000);
 
 </script>
