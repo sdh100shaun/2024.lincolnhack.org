@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 function DietaryForm() {
   const [email, setEmail ] = React.useState('');
   const [dietaryRequirements, setDietary ] = React.useState('');
   const [message, SetMessage] = React.useState('');
- const [ticketRef, setTicketRef] = React.useState('');
+  const [ticketRef, setTicketRef] = React.useState('');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -52,36 +52,24 @@ function DietaryForm() {
       console.error('An error occurred:', error);
     }
   };
-  
-  return (
-    <div>
-        <p className="text-rose-600 mb-10 font-bold text-pretty">{message}</p>
-        <p className="mb-10 text-lg md:text-xl"> Before you join us we need to confirm an email for each attendee so we can invite you to slack.
-        <i> So you have got multiple tickets, please make sure you fill out the form for each person attending using the unique ticket reference they have against their name.</i>
-        </p>
-      <form onSubmit={handleSubmit} method="POST">
-        <label className="block font-bold leading-6 text-gray-800 text-left" htmlFor="email">Confirm your Email</label>
-        <input
-          className="px-4 py-2 m-6 rounded-l block w-full text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
-          type="email"
-          placeholder="Enter your email you used to register with."
-          value={email}
-          name="email"
-          id="email"
-          onChange={handleEmailChange}
-        />
-        <label className="block font-bold text-gray-800 text-left" htmlFor="dietary">Dietary Requirements</label>
-        <select  className="m-6 block text-sm font-medium leading-6 text-gray-900" multiple={true} onChange={handleDietaryChange}>
-          <option value="">-- Please choose all Dietary options that apply --</option>
-          <option value="none">None</option>
-          <option value="Vegan">Vegan</option>
-          <option value="Vegetarian">Vegetarian</option>
-          <option value="Gluten Free">Gluten Free</option>
-          <option value="Allergy">Food Allergy</option>
-        </select>
 
-        <label className="block font-bold text-gray-800 text-left" htmlFor="ticketRef">Ticket Ref</label>
-        <input
+  const Output = ({ messageTxt })=> <p className="text-rose-600 mb-10 font-bold text-pretty">{messageTxt}</p>;
+  
+  const emailInput = ({ email, handleEmailChange})=>
+   <input
+    className="px-4 py-2 m-6 rounded-l block w-full text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+    type="email"
+    placeholder="Enter your email you used to register with."
+    value={email}
+    name="email"
+    id="email"
+    onChange={handleEmailChange}
+  />;
+
+  const label = (text, field) => <label className="block font-bold text-gray-800 text-left" htmlFor={field}>{text}</label>;
+
+  const ticketRefInput = ({ ticketRef, handleTicketRefChange})=>
+  <input
           className="px-4 py-2 m-6 rounded-l block w-full text-gray-900 border border-gray-300 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
           type="text"
           placeholder="Enter your ticket reference"
@@ -89,9 +77,34 @@ function DietaryForm() {
           name="ticketRef"
           id="ticketRef"
           onChange={handleTicketRefChange}
-        />
+        />;
 
-        <button className="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-r" type="submit">Send Details</button>
+  const dietaryInput = ({ dietaryRequirements, handleDietaryChange})=>
+      <select id="dietary" className="m-6 block text-sm font-medium leading-6 text-gray-900" multiple={true} onChange={handleDietaryChange}>
+      <option value="">-- Please choose all Dietary options that apply --</option>
+      <option value="none">None</option>
+      <option value="Vegan">Vegan</option>
+      <option value="Vegetarian">Vegetarian</option>
+      <option value="Gluten Free">Gluten Free</option>
+      <option value="Allergy">Food Allergy</option>
+    </select>;
+
+  const submitBtn = () => <button className="button-dark-purple hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-r" type="submit">Send Details</button>;
+  return (
+    <div>
+        <Output messageTxt={message} />
+        <p className="mb-10 text-lg md:text-xl"> Before you join us we need to confirm an email for each attendee so we can invite you to slack.
+        <i> So you have got multiple tickets, please make sure you fill out the form for each person attending using the unique ticket reference they have against their name.</i>
+        </p>
+      <form onSubmit={handleSubmit} method="POST">
+        {label('Confirm your email.', 'email')}
+        {emailInput({ email, handleEmailChange })}
+        {label('Dietary Requirements', 'dietary')}
+        {dietaryInput({ dietaryRequirements, handleDietaryChange })}
+        {label('Ticket Reference', 'ticketRef')}
+        {ticketRefInput({ ticketRef, handleTicketRefChange })}
+       
+        {submitBtn()}
       </form>
     </div>
   );
