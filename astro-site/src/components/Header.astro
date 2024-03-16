@@ -6,11 +6,13 @@
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
         <nav id="nav-menu" class="flex">
+            <button id="close-menu" aria-label="Close menu" class="close-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
             <ul class="flex flex-col md:flex-row list-none lg:space-x-4">
                 <li><a href="/" class="nav-link hover:text-purple-300">Home</a></li>
                 <li><a href="/challenge/index.html" class="nav-link hover:text-purple-300">Challenges</a></li>
                 <li><a href="/menu/index.html" class="nav-link hover:text-purple-300">Menu</a></li>
-
                 <li><a href="/faq/index.html" class="nav-link hover:text-purple-300">FAQ</a></li>
             </ul>
         </nav>
@@ -37,12 +39,14 @@
             color: #818CF8; /* Lighter purple for hover effect */
         }
 
+        #close-menu,
         #nav-menu {
             display: none;
         }
 
 
         @media (max-width: 768px) {
+            #close-menu,
             #burger {
                 display: block;
             }
@@ -83,6 +87,19 @@
                 font-size: 24px;
                 text-decoration: none;
             }
+
+            .close-menu-button {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+            }
+
+            .close-menu-button svg {
+                fill: white; /* Ensure the icon is visible against the menu background */
+            }
         }
 
         @media (min-width: 769px) {
@@ -112,6 +129,18 @@
 
         }
 
+
+
         
 </style>
 
+
+<script>
+    document.getElementById('burger').addEventListener('click', function() {
+        document.getElementById('nav-menu').classList.toggle('active');
+    });
+
+    document.getElementById('close-menu').addEventListener('click', function() {
+        document.getElementById('nav-menu').classList.remove('active');
+    });
+</script>
