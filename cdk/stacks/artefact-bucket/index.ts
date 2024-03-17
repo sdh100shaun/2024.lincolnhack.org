@@ -13,6 +13,7 @@ export class artefactBucket extends cdk.Stack {
       bucketName: props.bucketname,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
+      enforceSSL: true,
     });
   }
 }

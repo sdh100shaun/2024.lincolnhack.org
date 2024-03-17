@@ -27,7 +27,7 @@ function DietaryForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    e.target.disabled = true;
     try {
       const response = await fetch('https://api.2024.lincolnhack.org/contact', {
         method: 'POST',
@@ -44,6 +44,14 @@ function DietaryForm() {
           SetMessage('Please enter your email.');
         } else {
           SetMessage('Thanks for dietary requirements. We will be in touch.');
+          e.target.disabled = true;
+          setEmail('');
+          setDietary('');
+          setTicketRef('');
+          console.log('Data posted successfully.');
+          window.alert('Thanks for dietary requirements. We will be in touch if necessary.');
+          window.location.reload();
+          return;
         }
       } else {
         console.error('Failed to post data to the API.');
