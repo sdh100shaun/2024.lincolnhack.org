@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Page from "../components/Page.astro";
+
+const venueRules = [
+    {
+        title: "Stay on the Ground Floor",
+        description:
+            "Access is limited to the ground floor only. No non-tenants are allowed upstairs, even if accompanied by a tenant.",
+    },
+    {
+        title: "Toilet Facilities",
+        description: "Toilets are located along the corridor. Easy to find!",
+    },
+    {
+        title: "Fire Safety",
+        description:
+            "In the event of the fire alarm sounding please evacuate the building as quickly as possible and meet at the fire assembly point at <a href='https://maps.app.goo.gl/YzWL7K6n86Um7bpN8' class='underline hover:italic' target='_blank'>St Swithins Square</a> at the bottom of School Lane. Please wait in this area until we have confirmed it is safe to return to the building, we will do this as quickly as possible.",
+    },
+    {
+        title: "Cleanliness",
+        description:
+            "Keep your area tidy. Staff will periodically circulate with large bags for rubbish collection. Please cooperate by disposing of your trash appropriately.",
+    },
+    {
+        title: "Security Measures",
+        description:
+            "A security guard will be on duty throughout the night for everyone's safety. If you step out, please sign in and out - just so we know who’s where.",
+    },
+    {
+        title: "Admission Policy",
+        description:
+            "Don’t forget, your ticket is your entry pass. Make sure you have it with you!",
+    },
+];
+
+function generateId(title) {
+    return title
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+}
+---
+
+<Layout title="LincolnHack FAQ">
+    <Page>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+            Venue Rules
+        </h1>
+        <p class="text-lg mb-4">Welcome to LincolnHack at Mosaic!</p>
+
+        {
+            venueRules.map((rule, index) => (
+                <div
+                    key={generateId(rule.title)}
+                    id={generateId(rule.title)}
+                    class={`py-5 ${index !== venueRules.length - 1 ? "border-b border-gray-200" : ""}`}
+                >
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        {index + 1}. {rule.title}
+                    </h3>
+                    <p
+                        class="mt-2 text-sm text-gray-600"
+                        set:html={rule.description}
+                    />
+                </div>
+            ))
+        }
+        <p class="mt-2 text-sm text-gray-600">
+            Let’s make this LincolnHack awesome - filled with fun, learning, and
+            great memories. Thanks for keeping these points in mind! 🚀
+        </p>
+    </Page>
+</Layout>

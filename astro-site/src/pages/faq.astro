@@ -1,22 +1,117 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import FAQ from "../components/FAQ.astro";
+import Page from "../components/Page.astro";
+
+const FAQs = [
+  {
+    "question": "What is a Hackathon?",
+    "answer": "A hackathon is a social coding event where people come together in a collaborative environment to address challenges presented by sponsors, and hopefully win prizes!"
+  },
+  {
+    "question": "Why would someone participate in a Hackathon?",
+    "answer": "Individuals are drawn to hackathons for many reasons: to embrace the thrill of the challenge, to explore their creative potential, to engage in collaborative community projects, to expand their network, and of course, the swag."
+  },
+  {
+    "question": "How did LincolnHack begin?",
+    "answer": "LincolnHack, inspired by the original, community-driven Leeds Hack, is a non-profit hackathon aimed at showcasing Lincoln's innovative spirit and fostering a vibrant tech community. Leeds Hack stood out due to its unique blend of community engagement, innovative challenges, and a commitment to fostering local talent, all of which contributed to putting Leeds on the map as a thriving hub of technology and creativity. We want the same for Lincoln."
+  },
+  {
+    "question": "Who is this event for?",
+    "answer": "LincolnHack is open to anyone interested."
+  },
+  {
+    "question": "Is the event open to all ages?",
+    "answer": "LincolnHack is limited to those aged 18 and up. Those aged 14-17 can participate with a parent or guardian."
+  },
+  {
+    "question": "Who can participate? Are there any required skills?",
+    "answer": "All are welcome to participate. You do not need to be a programmer or developer. We encourage anyone with a passion for solving problems to join us."
+  },
+  {
+    "question": "Do I need a team?",
+    "answer": "While you do have the option of working alone, LincolnHack is a team event so working with others is encouraged. Teams can be any size, but we strongly suggest teams of 4 people as each challenge is limited to 4 prizes..."
+  },
+  {
+    "question": "How do I find a team?",
+    "answer": "If you don't have a team on the day, we will help you find one. You can also use our Slack channel to find a team in advance."
+  },
+  {
+    "question": "Will the challenges be announced before the event?",
+    "answer": "Yes, the challenges will be announced two days before the event. You can find them on our website."
+  },
+  {
+    "question": "Is there anything that I need to prep?",
+    "answer": "Other than finding people to team up with, there is nothing that you need to prepare in advance."
+  },
+  {
+    "question": "How much does it cost?",
+    "answer": "FREE. LincolnHack is a free event for all participants and spectators."
+  },
+  {
+    "question": "Where can I find directions to the building?",
+    "answer": "LincolnHack will be taking place at <a href='https://www.mosaiclincoln.co.uk' class='underline hover:italic' target='_blank'>Mosaic Lincoln</a>. The address is 13-14 Silver St, Lincoln LN2 1DY."
+  },
+  {
+    "question": "Where do I park?",
+    "answer": "There is no parking at the venue, so we recommend using the public parking at the <a href='https://www.lincoln.gov.uk/directory-record/53/lincoln-central-multistorey-' class='underline hover:italic' target='_blank'>Lincoln Central Car Park</a>, St Mary's St, Lincoln LN5 7EQ. Please note: parking charges apply."
+  },
+  {
+    "question": "Do I have to stay the whole time?",
+    "answer": "The hackathon is a 24-hour event, but you are not required to stay the entire time. You are welcome to come and go as you please."
+  },
+  {
+    "question": "Will there be food?",
+    "answer": "Yes, all meals will be provided throughout the event. After you register, we will ask your dietary requirements so we can accommodate them. We will also have snacks and drinks available."
+  },
+  {
+    "question": "What do I need to bring?",
+    "answer": "You will need to bring your own laptop, charger, and any other equipment you may need. We will provide the WiFi, power, and food. Sleeping bags, pillows, and toothbrush are optional, but recommended."
+  },
+  {
+    "question": "Who will be judging?",
+    "answer": "The judging panel is made up of our sponsors and local tech leaders."
+  },
+  {
+    "question": "Who owns the project I develop during the hackathon?",
+    "answer": "All projects developed during LincolnHack are the intellectual property of the individuals or teams that create them. Our sponsors support innovation and creativity; however, they do not retain any rights to the hacks produced at this event. Participants have full ownership of their projects and the freedom to continue developing them post-hackathon."
+  },
+  {
+    "question": "How do I unsubscribe from LincolnHack emails?",
+    "answer": "Send an email to <a href='mailto:hello@lincolnhack.org' class='underline hover:italic'>hello@lincolnhack.org</a> with subject unsubscribe."
+  },
+  {
+    "question": "Who drew your imp mascot?",
+    "answer": "The imp is designed by award winning illustrator and animator, <a href='https://www.upwork.com/freelancers/~01b699030b936f4b0e' class='underline hover:italic' target='_blank'>Steve Reynolds</a>."
+  }
+];
+
+function generateId(question) {
+  return question.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
 ---
 
 <Layout title="LincolnHack FAQ">
-    <div class="max-w-4xl mx-auto mt-5 mb-5">
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg min-h-screen">
-            <div class="w-full md:w-3/4 p-5">
-                <div class="max-w-4xl mx-auto px-4 py-8">
-                    <h1
-                        id="code-of-conduct"
-                        class="text-3xl font-bold text-gray-900 mb-4"
-                    >
-                        Frequently Asked Questions
-                    </h1>
-                    <FAQ />
-                </div>
-            </div>
+    <Page>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+            Frequently Asked Questions
+        </h1>
+
+          <!-- Index Section -->
+    <ol class="list-decimal ml-5 mb-6">
+        {FAQs.map(faq => (
+          <li key={generateId(faq.question)}>
+            <a href={`#${generateId(faq.question)}`} class="text-blue-600 hover:underline">{faq.question}</a>
+          </li>
+        ))}
+      </ol>
+  
+      {FAQs.map((faq, index) => (
+        <div key={generateId(faq.question)} id={generateId(faq.question)} 
+        class={`py-5 ${index !== FAQs.length - 1 ? 'border-b border-gray-200' : ''}`}
+        >
+          <h3 class="text-lg leading-6 font-medium text-gray-900">{index + 1}. {faq.question}</h3>
+          <p class="mt-2 text-sm text-gray-600" set:html={faq.answer}></p>
         </div>
-    </div>
+      ))}
+    </Page>
 </Layout>
