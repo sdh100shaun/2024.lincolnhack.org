@@ -1,3 +1,5 @@
+import { time } from "console";
+
 // Purpose: Agenda functionality for the site
 const agenda = () => {
     const agendaItems = document.querySelectorAll('.event__time');
@@ -5,9 +7,9 @@ const agenda = () => {
     if (agendaItems.length > 0) {
         agendaItems.forEach((item) => {
         
-            const difference = new Date(parseInt(item.dataset.starttime)).getTime() - currentTimestamp;
+            const difference = new Date(currentTimestamp - parseInt(item.dataset.starttime)).getTime();
             var secondsDifference = Math.floor(difference/1000);
-            console.log(secondsDifference);
+           
             if (secondsDifference > 0 && secondsDifference < 3600) {
                 item.classList.add('agenda__item--past');
                 item.innerHTML = 'been and gone';
@@ -18,7 +20,8 @@ const agenda = () => {
             }
             else {
                 item.classList.add('agenda__item--future');
-                item.innerHTML = 'starting in ' + Math.floor(secondsDifference/3600) + ' hours';
+                
+                item.innerHTML = 'starting in hours';
             }
         })
     }
