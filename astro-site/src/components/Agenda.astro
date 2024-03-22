@@ -15,7 +15,7 @@
         </div>
         <div class="flex flex-col md:flex-row md:justify-between mt-8">
             <div class="mb-4 md:mb-0">
-                <h3 class="text-xl font-bold mb-2">Challenge Annoucement</h3>
+                <h3 class="text-xl font-bold mb-2">Challenge Annoucements and Sponsor intros</h3>
                 <p class="text-gray-600 text-sm">Date: Saturday 23rd,<br/> 10:00 - 10:30 </p>
             </div>
             <p class="text-gray-700 event__time" data-starttime="1711188000" >&nbsp;</p>
@@ -87,4 +87,49 @@
 </div>
 </section>
 
-<script src="../scripts/agenda.ts"></script>
+<script>
+const agenda = () => {
+    const agendaItems = document.querySelectorAll('.event__time');
+
+    if (agendaItems.length > 0) {
+        agendaItems.forEach((item) => {
+            let date_future =  parseInt(item.dataset.starttime);
+            let date_now = new Date().valueOf();
+     
+    
+          var delta = Math.abs(date_future - date_now) / 1000;
+
+           
+            var days = Math.floor(delta / 86400);
+            delta -= days * 86400;
+
+          
+            var hours = Math.floor(delta / 3600) % 24;
+            delta -= hours * 3600;
+
+            // calculate (and subtract) whole minutes
+            var minutes = Math.floor(delta / 60) % 60;
+            delta -= minutes * 60;
+
+            
+            console.log(days, hours, minutes, seconds);
+
+            if (minutes < 0 && hours < 0 ) {
+                item.classList.add('agenda__item--past');
+                item.innerHTML = 'been and gone';
+            }
+            else if (minutes > 0 && hours < 2) {
+                item.classList.add('agenda__item--current');
+                item.innerHTML = ' &#128640; happening now';
+            }
+            else {
+                item.classList.add('agenda__item--future');
+                
+                item.innerHTML = 'starting';
+            }
+        })
+    }
+};
+agenda();
+const interval = setInterval(agenda, 1000,1);
+</script>
