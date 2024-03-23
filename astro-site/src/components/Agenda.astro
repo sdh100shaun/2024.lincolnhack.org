@@ -94,17 +94,15 @@ const agenda = () => {
 
     if (agendaItems.length > 0) {
         agendaItems.forEach((item) => {
-            let date_future =  parseInt(item.dataset.starttime);
+            let date_future =  new Date(parseInt(item.dataset.starttime) * 1000);
+        
             let date_now = new Date().valueOf();
-     
     
-          var delta = Math.abs(date_future - date_now) / 1000;
+            var delta = Math.abs(date_future - date_now) / 1000;
 
-           
             var days = Math.floor(delta / 86400);
             delta -= days * 86400;
 
-          
             var hours = Math.floor(delta / 3600) % 24;
             delta -= hours * 3600;
 
@@ -112,24 +110,18 @@ const agenda = () => {
             var minutes = Math.floor(delta / 60) % 60;
             delta -= minutes * 60;
 
-            
-            console.log(days, hours, minutes, seconds);
-
-            if (minutes < 0 && hours < 0 ) {
+            // check if date_future in past, present or future
+            if (date_future < date_now) {
                 item.classList.add('agenda__item--past');
                 item.innerHTML = 'been and gone';
-            }
-            else if (minutes > 0 && hours < 2) {
-                item.classList.add('agenda__item--current');
-                item.innerHTML = ' &#128640; happening now';
-            }
-            else {
+            } else {
                 item.classList.add('agenda__item--future');
                 
-                item.innerHTML = 'starting';
+                item.innerHTML = 'starting in ' + hours + ' hours ' + minutes + ' minutes';
             }
         })
     }
 };
+window.addEventListener('DOMContentLoaded', agenda);
 
 </script>
