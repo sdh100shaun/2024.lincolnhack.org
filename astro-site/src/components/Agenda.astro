@@ -113,7 +113,7 @@ const agenda = () => {
             // check if date_future in past, present or future
             if (date_future < date_now) {
                 item.classList.add('agenda__item--past');
-                item.innerHTML = 'been and gone';
+                item.innerHTML = '';
             } else {
                 item.classList.add('agenda__item--future');
                 
@@ -123,5 +123,5 @@ const agenda = () => {
     }
 };
 window.addEventListener('DOMContentLoaded', agenda);
-
+interval = setInterval(agenda, 5000);
 </script>
