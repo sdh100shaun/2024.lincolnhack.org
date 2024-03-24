@@ -1,0 +1,105 @@
+---
+const winners = [
+    {
+        challenge: {
+            name: "Streets Heaver",
+            image: "../images/streets-heaver-round.png"
+            },
+        places:[
+            {
+                team: "Streets Heaver",
+                place: "1st",
+                
+            },
+            {
+                team: "Streets Heaver",
+                place: "2nd",
+               
+            },
+        ]
+    },
+    {
+        challenge: {
+            name: "Rebel recruitment",
+            image: "../images/rebel.svg"
+            },
+        places:[
+            {
+                team: "Streets Heaver",
+                place: "1st",
+                
+            },
+            {
+                team: "Streets Heaver",
+                place: "2nd",
+                
+            },
+        ]
+    },
+    {
+        challenge: {
+            name: "Page Tiger",
+            image: "../images/pagetiger.svg"
+            },
+        places:[
+            {
+                team: "Streets Heaver",
+                place: "1st",
+               
+            },
+            {
+                team: "Streets Heaver",
+                place: "2nd",
+               
+            },
+        ]
+    },
+    {
+        challenge: {
+            name: "Epix Media",
+            image: "../images/epix-media-logo.svg"
+            },
+        places:[
+            {
+                team: "Streets Heaver",
+                place: "1st",
+                
+            },
+            {
+                team: "Streets Heaver",
+                place: "2nd",
+               
+            },
+        ]
+    },
+    
+];
+---
+        <div class="flex flex-col items-center justify-center gap-8">
+
+        {winners.map((winner) => (
+            
+            <div class="flex flex-col items-center justify-center gap-4">
+                <img src={ winner.challenge.image } alt={ winner.challenge.name } class="w-64 h-64" />
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <h2 class="text-2xl font-bold"></h2>
+                    {winner.places.map((place) => (
+                        <div class="flex flex-col items-center justify-center gap-2">
+                            <h3 class="text-xl font-bold">{place.place} {place.team}</h3>
+                        </div>
+                        
+                    ))}
+                    <hr class="w-1/2 border-t-2 border-black mt-8" />     
+                </div>
+            </div>
+            ))
+        }
+        </div>
+        <div class="flex flex-col items-center justify-center gap-8">
+            <!-- summary of winners and thanks -->
+            <div class="flex flex-col items-center justify-center gap-4">
+                <hr class="w-1/2 border-t-2 border-black mt-8" />
+                <p class="text-lg mt-8">Thank you to all the teams that took part in the challenges. We hope you had a great time and enjoyed the challenges. We look forward to seeing you at the next event.</p>
+            </div>
+        </div>
+    </div>

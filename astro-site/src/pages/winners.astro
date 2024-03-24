@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Winners from "../components/Winners.astro";
+---
+<Layout title="Winners">
+ <div class="max-w-4xl mx-auto mt-5 mb-5">
+
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg min-h-screen">
+        <div class="w-full p-5">
+            <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mt-6 mb-6">
+                2024 Winners
+            </h1>
+            <p class="text-gray-600">Here are the winners of the 2024 edition of the hackathon.</p>
+            </div>
+           
+             <div class="mt-5">
+                <Winners />
+            </div>
+        </div>
+    </div>
+</div>
