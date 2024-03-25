@@ -25,7 +25,7 @@
     "aws-cdk-lib": "^2.132.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.11.30",
     "aws-cdk-github-oidc": "^2.4.1",
     "typescript": "^5.4.2"
   }
