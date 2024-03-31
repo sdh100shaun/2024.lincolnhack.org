@@ -158,15 +158,14 @@ let index = 1;
 </style>
 <script>
   let index = 1;
-  const imageScroll = () => {
-    const currentIndex = () => {
+  const images = document.querySelectorAll(".swiper-slide img");
+  const currentIndex = () => {
       return index;
     };
     const next = () => {
       if (index < images.length) {
         index++;
       }
-      console.log(index);
       moveImage(currentIndex());
 
     };
@@ -176,8 +175,7 @@ let index = 1;
       }
      moveImage(currentIndex());
     };
-
-    const images = document.querySelectorAll(".swiper-slide img");
+  const imageScroll = () => {
     images.forEach((image) => {
       image.addEventListener("click", () => {
         index = parseInt(image.getAttribute("data-photo"));
@@ -201,6 +199,14 @@ let index = 1;
       }
     });
   };
+  document.querySelector(".left-14").addEventListener("click", () => {
+    prev();
+    updateCounter();
+  });
+    document.querySelector(".right-14").addEventListener("click", () => {
+        next();
+        updateCounter();
+    });
   const moveImage = (index) => {
       const image = document.querySelector(`img[data-photo="${index}"]`);
       image.scrollIntoView({ behavior: "smooth", block: "center" });
