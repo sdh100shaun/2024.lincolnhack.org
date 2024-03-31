@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Winners from "../components/Winners.astro";
+import WinnersComponent from "../components/Winners.astro";
+import Page from "../components/Page.astro";
 ---
 <Layout title="Winners">
+    
  <div class="max-w-4xl mx-auto mt-5 mb-5">
 
     <div class="bg-white shadow overflow-hidden sm:rounded-lg min-h-screen">
@@ -15,7 +17,7 @@ import Winners from "../components/Winners.astro";
             </div>
            
              <div class="mt-5">
-                <Winners />
+                <WinnersComponent />
             </div>
         </div>
     </div>

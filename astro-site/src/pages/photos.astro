@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Page from "../components/FullPage.astro";
+import GalleryComponent from "../components/HackGallery.astro";
+---
+
+<Layout title="Gallery">
+    <Page class:list={["md:w-screen"]}>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+            Photos
+        </h1>
+        <p class="mb-12 mx-auto leading-relaxed"> View Photos from the hack. </p>
+        <GalleryComponent />        
+    </Page>
+</Layout>
