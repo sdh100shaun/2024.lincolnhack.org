@@ -27,6 +27,6 @@
   "devDependencies": {
     "@types/node": "^20.11.28",
     "aws-cdk-github-oidc": "^2.4.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   }
 }
