@@ -1,0 +1,226 @@
+---
+import { Image } from 'astro:assets';
+const images = await Astro.glob("/src/images/photos/*").then((files) => {
+  return files.map((file) => file.default);
+});
+let index = 1;
+---
+
+<div class="relative w-full flex flex-shrink-0 overflow-hidden">
+  <div class="bg-gray-600 text-white absolute top-5 right-5 text-sm px-2 z-10">
+    <span class="position" x-text="currentIndex">{index}</span>/
+    <span x-text="images.length">{images.length}</span>
+  </div>
+  <section class="container">
+    <div class="flex swiper-slide w-full">
+      {
+        images.map(({ src }, index) => (
+          <img
+            class="h-full w-full"
+            src={src}
+            alt="lincoln hack event photo"
+            data-photo={`${index + 1}`}
+            style={`order: ${index + 1};padding: 0; margin: 0;`}
+            width="900px"
+            height="600px"
+
+          />
+        ))
+      }
+    </div>
+    <button
+      class="absolute left-14 top-1/2 -translate-y-1/2 w-11 h-11 flex justify-center items-center z-10 hover:bg-gray-200"
+    >
+      <svg
+        class="w-8 h-8 font-bold transition duration-500 ease-in-out transform motion-reduce:transform-none text-gray-500 hover:text-gray-600 hover:-translate-x-0.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2.5"
+          d="M15 19l-7-7 7-7"
+        >
+        </path>
+      </svg>
+    </button>
+
+    <button
+      class="absolute right-14 top-1/2 -translate-y-1/2 w-11 h-11 flex justify-center items-center z-10 hover:bg-gray-200"
+    >
+      <svg
+        class="w-8 h-8 font-bold transition duration-500 ease-in-out transform motion-reduce:transform-none text-gray-500 hover:text-gray-600 hover:translate-x-0.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2.5"
+          d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </section>
+</div>
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    padding: 1em;
+  }
+  .container .swiper-slide {
+    justify-content: left;
+    gap: 2em;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 1em;
+  }
+  .container .swiper-slide img {
+    display: inline-block;
+    width: auto;
+    height: 35em;
+    border-radius: 1em;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+  }
+
+  .container .swiper-slide img:visited {
+    transform: scale(1);
+    transition: transform 0.3s;
+  }
+  .container .swiper-slide img:link {
+    transform: scale(1);
+    transition: transform 0.3s;
+  }
+  .container .swiper-slide img:after {
+    content: attr(data-photo);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5em;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 0 0 1em 0;
+  }
+
+  .container .swiper-slide image:nth-child(odd) {
+    background: #f9f9f9;
+  }
+  .container .swiper-slide image:nth-child(even) {
+    background: #f1f1f1;
+  }
+
+  @media only screen and (min-width: 640px) {
+    .container {
+      padding:;
+    }
+    .container .swiper-slide img:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s;
+    }
+    .container .swiper-slide img:active {
+      transform: scale(1);
+      transition: transform 0.3s;
+    }
+    .container .swiper-slide img:focus {
+      transform: scale(1.05);
+      transition: transform 0.3s;
+    }
+  }
+  @media only screen and (max-width: 320px) {
+    .container {
+      padding: 0;
+    }
+    .container .swiper-slide {
+      gap: 1em;
+      width: 100%;
+      object-position: top;
+      max-height: 20em;
+    }
+    .container .swiper-slide img {
+      display: inline-flex;
+      height: 600px;
+      width: auto;
+      padding: 0;
+      max-height: 20em;
+      object-fit: contain;
+    }
+  }
+</style>
+<script>
+  let index = 1;
+  const images = document.querySelectorAll(".swiper-slide img");
+  const currentIndex = () => {
+    return index;
+  };
+  const next = () => {
+    if (index < images.length) {
+      index++;
+    }
+    moveImage(currentIndex());
+  };
+  const prev = () => {
+    if (index > 1) {
+      index--;
+    }
+    moveImage(currentIndex());
+  };
+  const imageScroll = (e) => {
+    
+    images.forEach((image) => {
+      image.addEventListener("click", () => {
+        index = parseInt(image.getAttribute("data-photo"));
+        if (index > images.length) {
+          index = 1;
+        }
+        if (currentIndex() >= 1 && currentIndex() < images.length) {
+          moveImage(currentIndex());
+          updateCounter();
+        }
+      });
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") {
+        next();
+        updateCounter();
+      }
+      if (e.key === "ArrowLeft") {
+        prev();
+        updateCounter();
+      }
+    });
+  };
+  document.querySelector(".left-14").addEventListener("click", (e) => {
+    e.preventDefault();
+    prev();
+    updateCounter();
+  });
+  document.querySelector(".right-14").addEventListener("click", (e) => {
+    e.preventDefault();
+    next();
+    updateCounter();
+  });
+  const moveImage = (index) => {
+    const image = document.querySelector(`img[data-photo="${index}"]`);
+    image.scrollIntoView({block: "center" });
+  };
+  const updateCounter = () => {
+    const position = document.querySelector(".position");
+    position.innerHTML = String(index);
+  };
+
+  window.addEventListener("load", imageScroll);
+</script>
