@@ -6,10 +6,12 @@ import GalleryComponent from "../components/HackGallery.astro";
 
 <Layout title="Gallery">
     <Page class:list={["md:w-screen"]}>
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+        <h1 class="ml-5 text-3xl font-bold text-gray-900 mb-4">
             Photos
         </h1>
-        <p class="mb-12 mx-auto leading-relaxed"> View Photos from the hack. </p>
-        <GalleryComponent />        
+        <p class="ml-5 mb-1 mx-auto leading-relaxed"> Thank you to everyone who joined us at the hackathon! The photos below offer a glimpse into the event's highlights, allowing you to relive the experience. We look forward to welcoming you back next year!  </p>
+         <GalleryComponent />  
+         <h2 class="ml-5 text-2xl font-bold text-gray-900 mb-4">Please give us your feedback</h2>
+         <p class=" ml-5 mb-1 mx-auto leading-relaxed">We value your feedback! Please take a moment to fill out the feedback form sent to attendees. For photos or to get involved next year, <a href="mailto:hello@lincolnhack.org">contact the organizers</a>. Thank you! </p>
     </Page>
 </Layout>
