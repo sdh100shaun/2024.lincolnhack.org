@@ -21,7 +21,7 @@
   "author": "shaun@shaunharre.co.uk",
   "license": "MIT",
   "dependencies": {
-    "aws-cdk": "^2.134.0",
+    "aws-cdk": "^2.143.0",
     "aws-cdk-lib": "^2.134.0"
   },
   "devDependencies": {
